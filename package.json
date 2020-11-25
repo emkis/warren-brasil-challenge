@@ -8,11 +8,15 @@
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "test:unit:watch": "vue-cli-service test:unit --watch --passWithNoTests",
+    "test:unit:coverage": "vue-cli-service test:unit --coverage --passWithNoTests",
+    "lint": "vue-cli-service lint",
+    "report": "vue-cli-service build --report"
   },
   "dependencies": {
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
+    "debounce": "^1.2.0",
     "normalize.css": "^8.0.1",
     "vue": "^2.6.11"
   },

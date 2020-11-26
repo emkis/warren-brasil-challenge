@@ -35,3 +35,7 @@ export function toggleAppScroll() {
   if (isScrollPrevented) appStyles.overflowY = ''
   else appStyles.overflowY = 'hidden'
 }
+
+export function asyncDelay(ms = 1000) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}

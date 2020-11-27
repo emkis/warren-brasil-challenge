@@ -42,3 +42,15 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+$gutter: 13px;
+
+.TransactionHistoryItem + .TransactionHistoryItem {
+  margin-top: $gutter;
+}
+
+.TransactionHistoryGroup + .TransactionHistoryGroup {
+  margin-top: ($gutter * 2);
+}
+</style>

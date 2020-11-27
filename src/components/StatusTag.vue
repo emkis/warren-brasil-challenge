@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { transactionStatusEnum } from '@/constants'
+import { transactionStatusEnum, transactionStatusTexts } from '@/constants'
 
 export default {
   name: 'StatusTag',
@@ -14,13 +14,7 @@ export default {
   },
   computed: {
     statusText() {
-      const texts = {
-        [transactionStatusEnum.CREATED]: 'Solicitada',
-        [transactionStatusEnum.PROCESSED]: 'Concluída',
-        [transactionStatusEnum.PROCESSING]: 'Processando',
-      }
-
-      return texts[this.status]
+      return transactionStatusTexts[this.status]
     },
     statusClass() {
       const cssClasses = {
@@ -39,6 +33,8 @@ export default {
 .StatusTag {
   --bg: #333;
   display: inline-block;
+  height: 20px;
+  width: fit-content;
   max-width: 150px;
   padding: 3px 13px;
   border-radius: 20px;

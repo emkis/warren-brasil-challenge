@@ -1,12 +1,16 @@
 <template>
   <div id="app">
-    <h1>warren brasil challenge</h1>
+    <TransactionsPage />
+    <ModalContainer />
   </div>
 </template>
 
 <script>
+import TransactionsPage from '@/pages/Transactions'
+import ModalContainer from '@/components/Modal/ModalContainer'
+
 export default {
   name: 'App',
-  components: {},
+  components: { TransactionsPage, ModalContainer },
 }
 </script>

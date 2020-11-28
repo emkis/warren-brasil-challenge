@@ -1,17 +1,23 @@
 <template>
   <div class="TransactionHistory">
-    <TransactionHistoryGroup
-      :key="dateGroup.date"
-      v-for="dateGroup in transactions"
-      :title="dateGroup.date"
-    >
-      <TransactionHistoryItem
-        :key="transaction.id"
-        v-for="transaction in dateGroup.transactions"
-        :transaction="transaction"
-        @click="handleTransactionClick(transaction)"
-      />
-    </TransactionHistoryGroup>
+    <template v-if="isTransactionListEmpty">
+      <h2 class="TransactionHistory__message">Nenhuma transação encontrada</h2>
+    </template>
+
+    <template v-else>
+      <TransactionHistoryGroup
+        :key="dateGroup.date"
+        v-for="dateGroup in transactions"
+        :title="dateGroup.date"
+      >
+        <TransactionHistoryItem
+          :key="transaction.id"
+          v-for="transaction in dateGroup.transactions"
+          :transaction="transaction"
+          @click="handleTransactionClick(transaction)"
+        />
+      </TransactionHistoryGroup>
+    </template>
   </div>
 </template>
 
@@ -32,6 +38,11 @@ export default {
   props: {
     transactions: { type: Array, required: true },
   },
+  computed: {
+    isTransactionListEmpty() {
+      return this.transactions.length === 0
+    },
+  },
   methods: {
     handleTransactionClick(transaction) {
       openModal({
@@ -44,13 +55,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$gutter: 13px;
+.TransactionHistory__message {
+  font-size: 16px;
+}
 
 .TransactionHistoryItem + .TransactionHistoryItem {
-  margin-top: $gutter;
+  margin-top: $default-gutter;
 }
 
 .TransactionHistoryGroup + .TransactionHistoryGroup {
-  margin-top: ($gutter * 2);
+  margin-top: $default-gutter * 2;
 }
 </style>

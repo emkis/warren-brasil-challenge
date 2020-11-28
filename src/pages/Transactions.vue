@@ -1,25 +1,21 @@
 <template>
-  <div id="Transactions">
-    <h1>Warren Brasil Challenge</h1>
-    <span>{{ new Date() }}</span>
-    <br /><br />
+  <div class="Transactions">
+    <h1 class="Transactions__title">Suas transações</h1>
 
-    <TheInput
-      placeholder="Busque aqui uma transação"
-      label="Hello there.."
+    <AppInput
+      placeholder="Busque transações aqui"
+      label="Busque transações aqui"
       :value="filterQuery"
+      ref="searchInput"
       @input="handleInputChange"
+      autofocus
     />
 
-    <select name="types" v-model="filterType">
-      <option
-        :key="typeIndex"
-        v-for="(type, typeIndex) in filters"
-        :value="type"
-      >
-        {{ type }}
-      </option>
-    </select>
+    <FilterOptions
+      :options="transactionFilters"
+      :value="filterType"
+      @on-select="handleSelectedFilter"
+    />
 
     <TransactionHistory
       :isLoading="isLoading"
@@ -31,16 +27,21 @@
 <script>
 import { debounce } from 'debounce'
 
-import { filterTypesEnum } from '@/constants'
+import {
+  filterTypesEnum,
+  filterTypesTexts,
+  transactionStatusTexts,
+} from '@/constants'
 import { removeAccent, groupArrayByProp, asyncDelay } from '@/utilities'
 import { TransactionService } from '@/services/TransactionService'
 
+import AppInput from '@/components/AppInput'
+import FilterOptions from '@/components/FilterOptions'
 import TransactionHistory from '@/components/TransactionHistory'
-import TheInput from '@/components/TheInput'
 
 export default {
   name: 'TransactionsPage',
-  components: { TheInput, TransactionHistory },
+  components: { AppInput, FilterOptions, TransactionHistory },
   data() {
     return {
       isLoading: true,
@@ -77,13 +78,35 @@ export default {
       const inputValue = event.target.value.trim()
       this.filterQuery = inputValue
     }, 200),
+    handleSelectedFilter(filterName = '') {
+      this.filterType = filterName
+      this.$refs.searchInput.focus()
+    },
   },
   computed: {
-    filters() {
-      return Object.values(filterTypesEnum)
+    transactionFilters() {
+      const filterTypes = Object.values(filterTypesEnum)
+      const formatFilter = (filterType) => {
+        return {
+          name: filterTypesTexts[filterType],
+          value: filterType,
+        }
+      }
+
+      return filterTypes.map(formatFilter)
+    },
+    parsedTransactions() {
+      const formatTransactionStatus = (transaction) => {
+        const originalStatus = transaction.status
+        const customStatus = transactionStatusTexts[originalStatus]
+
+        return { ...transaction, status: customStatus, originalStatus }
+      }
+
+      return this.originalTransactions.map(formatTransactionStatus)
     },
     filteredTransactions() {
-      return this.originalTransactions?.filter((transaction) => {
+      return this.parsedTransactions?.filter((transaction) => {
         const targetProperty = transaction[this.filterType]
 
         const normalizedString = removeAccent(targetProperty.toLowerCase())
@@ -113,7 +136,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#Transactions {
-  padding: 30px 13px;
+.Transactions {
+  max-width: 533px;
+  margin: 0 auto;
+  padding: ($default-gutter * 3) ($default-gutter);
+
+  &__title {
+    margin-bottom: $default-gutter * 2;
+  }
+
+  .TransactionHistory {
+    margin-top: $default-gutter * 4;
+  }
+
+  * + * {
+    margin-top: $default-gutter;
+  }
 }
 </style>

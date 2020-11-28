@@ -31,9 +31,15 @@ export function formatDateString(targetDate) {
 export function toggleAppScroll() {
   const appStyles = document.body.style
   const isScrollPrevented = appStyles.overflowY === 'hidden'
+  const navbarSize = '15px'
 
-  if (isScrollPrevented) appStyles.overflowY = ''
-  else appStyles.overflowY = 'hidden'
+  if (isScrollPrevented) {
+    appStyles.overflowY = ''
+    appStyles.marginRight = ''
+  } else {
+    appStyles.overflowY = 'hidden'
+    appStyles.marginRight = navbarSize
+  }
 }
 
 export function asyncDelay(ms = 1000) {

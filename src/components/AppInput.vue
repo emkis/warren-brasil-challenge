@@ -4,7 +4,7 @@
 
     <input
       :id="uuid"
-      type="text"
+      :type="type"
       ref="input"
       v-bind="$attrs"
       v-on="$listeners"
@@ -21,6 +21,7 @@ export default {
   props: {
     label: { type: String, required: true },
     value: { type: String, required: true },
+    type: { type: String, default: 'text' },
   },
   computed: {
     uuid() {

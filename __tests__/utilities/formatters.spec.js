@@ -21,24 +21,24 @@ describe('Utility Functions', () => {
         expect(formattedValue).toBe('2.423,54')
       })
     })
-  })
 
-  describe('formatDateString()', () => {
-    it('should return a date formatted string', () => {
-      expect(formatDateString('1998-03-28')).toBe('28 de março de 1998')
-      expect(formatDateString('2005-10-24')).toBe('24 de outubro de 2005')
-      expect(formatDateString('2020-11-28')).toBe('28 de novembro de 2020')
-    })
+    describe('formatDateString()', () => {
+      it('should return a date formatted string', () => {
+        expect(formatDateString('1998-03-28')).toBe('28 de março de 1998')
+        expect(formatDateString('2005-10-24')).toBe('24 de outubro de 2005')
+        expect(formatDateString('2020-11-28')).toBe('28 de novembro de 2020')
+      })
 
-    it('should return a invalid date when provided date string with hours', () => {
-      const originalDate = '2005-10-24 04:12:23'
-      const formattedDate = formatDateString(originalDate)
+      it('should return a invalid date when provided date string with hours', () => {
+        const originalDate = '2005-10-24 04:12:23'
+        const formattedDate = formatDateString(originalDate)
 
-      expect(formattedDate).toBe('Invalid Date')
-    })
+        expect(formattedDate).toBe('Invalid Date')
+      })
 
-    it('should return null if no argument is provided', () => {
-      expect(formatDateString()).toBeNull()
+      it('should return null if no argument is provided', () => {
+        expect(formatDateString()).toBeNull()
+      })
     })
   })
 })

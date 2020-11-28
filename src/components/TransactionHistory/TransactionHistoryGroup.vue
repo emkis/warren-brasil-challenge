@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { formatDateString } from '@/utilities'
+import { formatDateString } from '@/utilities/formatters'
 
 export default {
   name: 'TransactionHistoryGroup',

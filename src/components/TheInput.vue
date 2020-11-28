@@ -1,11 +1,12 @@
 <template>
   <fieldset class="TheInput">
-    <label class="sr-only">{{ label }}</label>
+    <label for="the-input" class="sr-only">{{ label }}</label>
 
     <input
       type="text"
       v-bind="$attrs"
       v-on="$listeners"
+      id="the-input"
       class="TheInput__field"
       :value="value"
     />

@@ -1,4 +1,10 @@
 # Warren Brasil Challenge
+Projeto construído para o desafio técnico da Warren Brasil.
+
+## Interface do projeto
+Toda UI implementada para esse desafio foi criada por mim utilizando a ferramenta Figma. Para acessar o layout do projeto você pode acessar [esse link aqui](https://www.figma.com/file/dirryQFaWAsnolYyRve2s7/Warren-Brasil-Challenge).
+
+A ideia da interface foi criada apenas me baseando nos requisitos, features e wireframe previamente informados desse desafio.
 
 
 ## Justificativas de decisões técnicas

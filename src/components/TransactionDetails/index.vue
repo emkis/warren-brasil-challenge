@@ -1,7 +1,7 @@
 <template>
   <div class="TransactionDetails">
     <h2>{{ transaction.title }}</h2>
-    <TransactionProgressBar :status="transaction.status" />
+    <TransactionProgressBar :status="transaction.status.value" />
 
     <br /><br />
     <h3>Transferido de:</h3>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { formatCurrencyBRL } from '@/utilities'
+import { formatCurrencyBRL } from '@/utilities/formatters'
 import TransactionProgressBar from './TransactionProgressBar'
 
 export default {

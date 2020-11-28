@@ -7,13 +7,13 @@
 
     <div class="TransactionHistoryItem__row">
       <p>{{ transaction.description }}</p>
-      <StatusTag :status="transaction.originalStatus" />
+      <StatusTag :status="transaction.status.value" />
     </div>
   </li>
 </template>
 
 <script>
-import { formatCurrencyBRL } from '@/utilities'
+import { formatCurrencyBRL } from '@/utilities/formatters'
 import StatusTag from '@/components/StatusTag'
 
 export default {
@@ -32,7 +32,7 @@ export default {
 .TransactionHistoryItem {
   padding: 20px;
   border-radius: $radius-box;
-  background: #e9e9e9;
+  background: $color-gray-element;
   cursor: pointer;
 
   &__row {

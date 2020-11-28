@@ -1,4 +1,4 @@
-import { groupArrayByProp, removeAccent } from '@/utilities'
+import { groupArrayByProp, removeAccent, toggleAppScroll } from '@/utilities'
 
 describe('Utility Functions', () => {
   describe('removeAccent()', () => {
@@ -59,6 +59,33 @@ describe('Utility Functions', () => {
 
     it('should return null if no arguments is provided', () => {
       expect(groupArrayByProp()).toBeNull()
+    })
+  })
+
+  describe('toggleAppScroll()', () => {
+    it('should add inline style to prevent overflow when executed', () => {
+      const beforeCallDocumentStyles = document.body.style.overflowY
+      toggleAppScroll()
+      const afterCallDocumentStyles = document.body.style.overflowY
+
+      expect(beforeCallDocumentStyles).toBe('')
+      expect(afterCallDocumentStyles).toBe('hidden')
+    })
+
+    it('should remove the inline styles if they already exists', () => {
+      toggleAppScroll()
+      const pageStyles = document.body.style
+
+      expect(pageStyles.overflowY).toBe('')
+    })
+
+    it('should toggle inline styles when executed twice', () => {
+      const beforeCallDocumentStyles = document.body.style.overflowY
+      toggleAppScroll()
+      const afterCallDocumentStyles = document.body.style.overflowY
+
+      expect(beforeCallDocumentStyles).toBe('')
+      expect(afterCallDocumentStyles).toBe('hidden')
     })
   })
 })

@@ -81,7 +81,7 @@ export default {
     },
     getFilteredTransactions(transactions) {
       return transactions.filter((transaction) => {
-        const targetProperty = transaction[this.filterType]
+        const targetProperty = String(transaction[this.filterType])
 
         const normalizedString = removeAccent(targetProperty.toLowerCase())
         const normalizedQuery = removeAccent(this.filterQuery.toLowerCase())

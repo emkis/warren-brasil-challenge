@@ -1,19 +1,24 @@
 <template>
   <li class="TransactionHistoryItem" v-on="$listeners">
-    <div>
+    <div class="TransactionHistoryItem__row">
       <h3>{{ transaction.title }}</h3>
       <h4>{{ formatAmount(transaction.amount) }}</h4>
     </div>
-    <small>{{ transaction.status }}</small>
-    <p>{{ transaction.description }}</p>
+
+    <div class="TransactionHistoryItem__row">
+      <p>{{ transaction.description }}</p>
+      <StatusTag :status="transaction.status" />
+    </div>
   </li>
 </template>
 
 <script>
 import { formatCurrencyBRL } from '@/utilities'
+import StatusTag from '@/components/StatusTag'
 
 export default {
   name: 'TransactionHistoryItem',
+  components: { StatusTag },
   props: {
     transaction: { type: Object, required: true },
   },
@@ -27,16 +32,22 @@ export default {
 .TransactionHistoryItem {
   padding: 20px;
   border-radius: $radius-box;
-  background: #ddd;
+  background: #e9e9e9;
   cursor: pointer;
 
-  > div {
-    display: flex;
-    justify-content: space-between;
+  &__row {
+    $safeSpace: 30px;
+    display: grid;
+    grid-template-columns: 4fr $safeSpace 1fr;
+
+    :nth-child(2) {
+      grid-column: 3 / 4;
+      margin-left: auto;
+    }
   }
 
-  & + .TransactionHistoryItem {
-    margin-top: 13px;
+  &__row + &__row {
+    margin-top: 10px;
   }
 
   &:hover {

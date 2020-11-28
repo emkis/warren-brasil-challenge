@@ -28,10 +28,10 @@ const TransactionDetails = () => {
 
 export default {
   name: 'TransactionHistory',
+  components: { TransactionHistoryGroup, TransactionHistoryItem },
   props: {
     transactions: { type: Array, required: true },
   },
-  components: { TransactionHistoryGroup, TransactionHistoryItem },
   methods: {
     handleTransactionClick(transaction) {
       openModal({

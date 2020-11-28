@@ -24,12 +24,9 @@ export default {
 
 <style lang="scss" scoped>
 .TransactionHistoryGroup {
-  padding: 16px;
-  margin-bottom: 13px;
-
   &__title {
     font-size: 16px;
-    margin-bottom: 15px;
+    margin-bottom: 13px;
   }
 
   &__list {

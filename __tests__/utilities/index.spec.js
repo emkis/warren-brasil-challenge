@@ -1,4 +1,4 @@
-import { removeAccent, formatCurrencyBRL } from '@/utilities'
+import { removeAccent } from '@/utilities'
 
 describe('Utility Functions', () => {
   describe('removeAccent()', () => {
@@ -12,26 +12,6 @@ describe('Utility Functions', () => {
     it('should return an empty string when nothing is provided', () => {
       const normalizedString = removeAccent()
       expect(normalizedString).toBe('')
-    })
-  })
-
-  describe('formatCurrencyBRL()', () => {
-    it('should return a formatted string with BRL currency', () => {
-      const value = 1560
-      const formattedValue = formatCurrencyBRL(value)
-
-      expect(formattedValue).toBe('R$\xa01,560.00')
-    })
-
-    it('should return a value formatted zero value when nothing is provided', () => {
-      expect(formatCurrencyBRL()).toBe('R$\xa00.00')
-    })
-
-    it('should return a formatted BRL currency without prefix when provided false in the second argument', () => {
-      const value = 2423.54
-      const formattedValue = formatCurrencyBRL(value, false)
-
-      expect(formattedValue).toBe('2,423.54')
     })
   })
 })

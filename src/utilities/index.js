@@ -3,6 +3,8 @@ export function removeAccent(targetString = '') {
 }
 
 export function groupArrayByProp(propName, targetArray) {
+  if (!propName || !targetArray) return null
+
   return targetArray.reduce((acc, currentValue) => {
     const currentProp = currentValue[propName]
 

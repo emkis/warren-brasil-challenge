@@ -3,12 +3,13 @@
     <label :for="uuid" class="sr-only">{{ label }}</label>
 
     <input
+      :id="uuid"
       type="text"
+      ref="input"
       v-bind="$attrs"
       v-on="$listeners"
-      :id="uuid"
-      class="AppInput__field"
       :value="value"
+      class="AppInput__field"
     />
   </fieldset>
 </template>
@@ -24,6 +25,11 @@ export default {
   computed: {
     uuid() {
       return Math.random().toString(16).slice(10)
+    },
+  },
+  methods: {
+    focus() {
+      this.$refs.input.focus()
     },
   },
 }

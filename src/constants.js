@@ -11,6 +11,11 @@ export const transactionStatusTexts = Object.freeze({
 })
 
 export const filterTypesEnum = Object.freeze({
-  STATUS: 'status',
   TITLE: 'title',
+  STATUS: 'status',
+})
+
+export const filterTypesTexts = Object.freeze({
+  [filterTypesEnum.TITLE]: 'Título',
+  [filterTypesEnum.STATUS]: 'Status',
 })

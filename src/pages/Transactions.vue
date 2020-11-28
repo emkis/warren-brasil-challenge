@@ -12,15 +12,12 @@
     />
 
     <FilterOptions
-      :options="transactionFilters"
+      :options="filters"
       :value="filterType"
       @on-select="handleSelectedFilter"
     />
 
-    <TransactionHistory
-      :isLoading="isLoading"
-      :transactions="normalizedTransactions"
-    />
+    <TransactionHistory :isLoading="isLoading" :transactions="transactions" />
   </div>
 </template>
 
@@ -82,31 +79,8 @@ export default {
       this.filterType = filterName
       this.$refs.searchInput.focus()
     },
-  },
-  computed: {
-    transactionFilters() {
-      const filterTypes = Object.values(filterTypesEnum)
-      const formatFilter = (filterType) => {
-        return {
-          name: filterTypesTexts[filterType],
-          value: filterType,
-        }
-      }
-
-      return filterTypes.map(formatFilter)
-    },
-    parsedTransactions() {
-      const formatTransactionStatus = (transaction) => {
-        const originalStatus = transaction.status
-        const customStatus = transactionStatusTexts[originalStatus]
-
-        return { ...transaction, status: customStatus, originalStatus }
-      }
-
-      return this.originalTransactions.map(formatTransactionStatus)
-    },
-    filteredTransactions() {
-      return this.parsedTransactions?.filter((transaction) => {
+    getFilteredTransactions(transactions) {
+      return transactions.filter((transaction) => {
         const targetProperty = transaction[this.filterType]
 
         const normalizedString = removeAccent(targetProperty.toLowerCase())
@@ -115,21 +89,57 @@ export default {
         return normalizedString.includes(normalizedQuery)
       })
     },
-    normalizedTransactions() {
-      const formatTransactionItem = (transactionDate) => {
-        return {
-          date: transactionDate,
-          transactions: this.transactionsGroupedByDate[transactionDate],
-        }
+    groupTransactionsByDate(transactions) {
+      return groupArrayByProp('date', transactions)
+    },
+    parseTransactions(transactions) {
+      const formatTransactionStatus = (transaction) => {
+        const originalStatus = transaction.status
+        const customStatus = transactionStatusTexts[originalStatus]
+
+        return { ...transaction, status: customStatus, originalStatus }
       }
 
-      return Object.keys(this.transactionsGroupedByDate)
+      return transactions.map(formatTransactionStatus)
+    },
+    sortTransactions(transactions) {
+      const formatTransactionItem = (transactionDate) => {
+        const dayTransactions = transactions[transactionDate]
+        return { date: transactionDate, transactions: dayTransactions }
+      }
+
+      return Object.keys(transactions)
         .sort()
         .reverse()
         .map(formatTransactionItem)
     },
-    transactionsGroupedByDate() {
-      return groupArrayByProp('date', this.filteredTransactions)
+  },
+  computed: {
+    filters() {
+      const filters = Object.values(filterTypesEnum)
+
+      const formatFilter = (filterType) => {
+        const filterName = filterTypesTexts[filterType]
+        return { name: filterName, value: filterType }
+      }
+
+      return filters.map(formatFilter)
+    },
+    transactions() {
+      const {
+        originalTransactions,
+        parseTransactions,
+        getFilteredTransactions,
+        groupTransactionsByDate,
+        sortTransactions,
+      } = this
+
+      const parsedTransactions = parseTransactions(originalTransactions)
+      const filteredTransactions = getFilteredTransactions(parsedTransactions)
+      const groupedTransactions = groupTransactionsByDate(filteredTransactions)
+      const sortedTransactions = sortTransactions(groupedTransactions)
+
+      return sortedTransactions
     },
   },
 }

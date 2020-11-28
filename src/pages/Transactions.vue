@@ -30,6 +30,7 @@ import {
   transactionStatusTexts,
 } from '@/constants'
 import { removeAccent, groupArrayByProp, asyncDelay } from '@/utilities'
+import { isObject } from '@/utilities/checkers'
 import { TransactionService } from '@/services/TransactionService'
 
 import AppInput from '@/components/AppInput'
@@ -81,9 +82,13 @@ export default {
     },
     getFilteredTransactions(transactions) {
       return transactions.filter((transaction) => {
-        const targetProperty = String(transaction[this.filterType])
+        const targetProperty = transaction[this.filterType]
 
-        const normalizedString = removeAccent(targetProperty.toLowerCase())
+        const targetValue = isObject(targetProperty)
+          ? targetProperty.formatted
+          : targetProperty
+
+        const normalizedString = removeAccent(String(targetValue).toLowerCase())
         const normalizedQuery = removeAccent(this.filterQuery.toLowerCase())
 
         return normalizedString.includes(normalizedQuery)
@@ -94,10 +99,16 @@ export default {
     },
     parseTransactions(transactions) {
       const formatTransactionStatus = (transaction) => {
-        const originalStatus = transaction.status
-        const customStatus = transactionStatusTexts[originalStatus]
+        const statusValue = transaction.status
+        const formattedStatus = transactionStatusTexts[statusValue]
 
-        return { ...transaction, status: customStatus, originalStatus }
+        return {
+          ...transaction,
+          status: {
+            value: statusValue,
+            formatted: formattedStatus,
+          },
+        }
       }
 
       return transactions.map(formatTransactionStatus)

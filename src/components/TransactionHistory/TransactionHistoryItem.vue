@@ -7,7 +7,7 @@
 
     <div class="TransactionHistoryItem__row">
       <p>{{ transaction.description }}</p>
-      <StatusTag :status="transaction.status" />
+      <StatusTag :status="transaction.originalStatus" />
     </div>
   </li>
 </template>

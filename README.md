@@ -2,10 +2,13 @@
 Projeto construído para o desafio técnico da Warren Brasil.
 
 ## Interface do projeto
-Toda UI implementada para esse desafio foi criada por mim utilizando a ferramenta Figma. Para acessar o layout do projeto você pode acessar [esse link aqui](https://www.figma.com/file/dirryQFaWAsnolYyRve2s7/Warren-Brasil-Challenge).
+Toda UI implementada para esse desafio foi criada por mim utilizando a ferramenta Figma. Para acessar o layout do projeto você pode acessar esse [**link aqui**](https://www.figma.com/file/dirryQFaWAsnolYyRve2s7/Warren-Brasil-Challenge).
 
 A ideia da interface foi criada apenas me baseando nos requisitos, features e wireframe previamente informados desse desafio.
 
+## Deploy
+Foi feito deploy da aplicação utilizando o serviço Netlify.
+**Acesse a aplicação online** está acessível por esse [**link aqui**](https://emkis-warren-challenge.netlify.app).
 
 ## Justificativas de decisões técnicas
 Abaixo explico um pouco o por que de eu ter adicionado algumas dependências, e como foram resolvidos os problemas que essa aplicação precisava resolver.

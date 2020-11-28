@@ -1,0 +1,129 @@
+<template>
+  <div class="TransactionProgressBar">
+    <div class="TransactionProgressBar__bar">
+      <div class="TransactionProgressBar__progress" :style="progressStyle" />
+    </div>
+
+    <div class="TransactionProgressBar__context">
+      <div
+        :key="step.status"
+        v-for="(step, stepIndex) in transactionSteps"
+        class="TransactionProgressBar__progress-point"
+        :class="[
+          { active: step.status === status },
+          { complete: stepIndex <= currentStepIndex },
+        ]"
+      >
+        <div class="TransactionProgressBar__small-circle" />
+        <h5 class="TransactionProgressBar__label">{{ step.text }}</h5>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { transactionStatusEnum, transactionStatusTexts } from '@/constants'
+
+export default {
+  name: 'TransactionProgressBar',
+  props: {
+    status: { type: String, required: true },
+  },
+  computed: {
+    transactionSteps() {
+      const totalSteps = Object.keys(transactionStatusEnum).length
+
+      return Object.values(transactionStatusEnum).map((status, statusIndex) => {
+        return {
+          progress: (statusIndex / (totalSteps - 1)) * 100,
+          status,
+          text: transactionStatusTexts[status],
+        }
+      })
+    },
+    currentStepIndex() {
+      return this.transactionSteps.indexOf(this.currentStep)
+    },
+    currentStep() {
+      return this.transactionSteps.find(({ status }) => status === this.status)
+    },
+    progressStyle() {
+      const { progress } = this.currentStep
+      return `transform: translateX(${progress}%)`
+    },
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+.TransactionProgressBar {
+  position: relative;
+  padding: 30px 0;
+  $this: &;
+
+  &__bar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 6px;
+    border-radius: 12px;
+    background: #00b563;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+  }
+
+  &__progress {
+    height: 100%;
+    background: rgb(207, 207, 207);
+    transition: transform 200ms ease-in;
+  }
+
+  &__context {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__progress-point {
+    position: relative;
+
+    &.complete #{$this}__small-circle {
+      background: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 6px #4bc161;
+    }
+
+    &.complete #{$this}__label,
+    &.active #{$this}__label {
+      color: #000;
+    }
+
+    &.active #{$this}__small-circle {
+      background: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 10px #44bd5a;
+    }
+  }
+
+  &__small-circle {
+    $circleSize: 12px;
+    position: relative;
+    background: #9d9d9d;
+    width: $circleSize;
+    height: $circleSize;
+    border-radius: 100%;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+    z-index: 1;
+  }
+
+  &__label {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin: 20px 0 0 0;
+    font-size: 13px;
+    color: #969696;
+
+    transform: translate(-50%, 0);
+  }
+}
+</style>

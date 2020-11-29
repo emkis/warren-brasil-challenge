@@ -1,6 +1,6 @@
 <template>
-  <div class="Transactions">
-    <h1 class="Transactions__title">Suas transações</h1>
+  <div class="Transactions container">
+    <h2 class="Transactions__title">Suas transações</h2>
 
     <AppInput
       placeholder="Busque transações aqui"
@@ -12,12 +12,18 @@
     />
 
     <FilterOptions
+      aria-label="Opções de filtro"
       :options="filters"
       :value="filterType"
       @on-select="handleSelectedFilter"
     />
 
-    <TransactionHistory :isLoading="isLoading" :transactions="transactions" />
+    <TransactionHistory
+      class="Transactions__history"
+      aria-label="Lista de transações"
+      :isLoading="isLoading"
+      :transactions="transactions"
+    />
   </div>
 </template>
 
@@ -158,20 +164,19 @@ export default {
 
 <style lang="scss" scoped>
 .Transactions {
-  max-width: 533px;
-  margin: 0 auto;
   padding: ($default-gutter * 3) ($default-gutter);
-
-  &__title {
-    margin-bottom: $default-gutter * 2;
-  }
-
-  .TransactionHistory {
-    margin-top: $default-gutter * 4;
-  }
 
   * + * {
     margin-top: $default-gutter;
+  }
+
+  &__title {
+    margin-bottom: $default-gutter * 2;
+    font-size: 24px;
+  }
+
+  ::v-deep &__history {
+    margin-top: $default-gutter * 4;
   }
 }
 </style>

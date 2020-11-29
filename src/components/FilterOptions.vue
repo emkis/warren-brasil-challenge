@@ -33,6 +33,9 @@ export default {
   },
   methods: {
     setActiveOption(option) {
+      const isActiveOptionTheSame = this.activeOption === option.value
+      if (isActiveOptionTheSame) return
+
       this.activeOption = option.value
       this.$emit('on-select', option.value)
     },
@@ -46,7 +49,7 @@ export default {
   align-items: center;
 
   &__option {
-    padding: 6px 20px;
+    padding: 5px 20px;
     font-size: 14px;
     font-family: $font-title;
     font-weight: 500;
@@ -55,6 +58,7 @@ export default {
     border-radius: 50px;
     border: 1px solid transparent;
     background: $color-gray-element;
+    transition: background $default-transition, color $default-transition;
     cursor: pointer;
 
     &--active {

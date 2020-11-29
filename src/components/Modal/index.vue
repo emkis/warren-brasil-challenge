@@ -8,8 +8,12 @@
         title="Close"
         @click="handleClose"
       >
-        x
+        <IconClose size="14" color="#606060" />
       </button>
+
+      <header v-if="title" class="Modal__header">
+        <h4 class="Modal__title">Resumo de transação</h4>
+      </header>
 
       <main class="Modal__body">
         <slot />
@@ -19,9 +23,13 @@
 </template>
 
 <script>
+import { IconClose } from '@/components/icons'
+
 export default {
   name: 'Modal',
+  components: { IconClose },
   props: {
+    title: { type: String, required: false },
     isClosable: { type: Boolean },
   },
   mounted() {
@@ -63,6 +71,18 @@ export default {
   background: rgba(#000, 0.53);
   z-index: 1;
 
+  &__header {
+    padding: 22px;
+    text-align: center;
+    background: $color-gray-element;
+  }
+
+  &__title {
+    font-size: 16px;
+    line-height: 1.5;
+    color: $color-black;
+  }
+
   &__exit-btn {
     $btn-position: 14px;
     $button-size: 40px;
@@ -89,7 +109,6 @@ export default {
 
   &__container {
     position: relative;
-    margin: 13px;
     border-radius: $radius-box;
     overflow: hidden;
   }

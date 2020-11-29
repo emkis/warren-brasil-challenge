@@ -5,7 +5,7 @@
     <AppInput
       placeholder="Busque transações aqui"
       label="Busque transações aqui"
-      :value="filterQuery"
+      :value="searchQuery"
       ref="searchInput"
       @input="handleInputChange"
       autofocus
@@ -13,8 +13,8 @@
 
     <FilterOptions
       aria-label="Opções de filtro"
-      :options="filters"
-      :value="filterType"
+      :options="filterOptions"
+      :value="statusFilter"
       @on-select="handleSelectedFilter"
     />
 
@@ -31,8 +31,8 @@
 import { debounce } from 'debounce'
 
 import {
-  filterTypesEnum,
-  filterTypesTexts,
+  filterStatusTypes,
+  filterStatusTypesTexts,
   transactionStatusTexts,
 } from '@/constants'
 import { removeAccent, groupArrayByProp, asyncDelay } from '@/utilities'
@@ -52,8 +52,8 @@ export default {
       hasError: false,
 
       originalTransactions: [],
-      filterQuery: '',
-      filterType: filterTypesEnum.TITLE,
+      searchQuery: '',
+      statusFilter: filterStatusTypes.ALL,
     }
   },
   mounted() {
@@ -80,28 +80,11 @@ export default {
     },
     handleInputChange: debounce(function (event) {
       const inputValue = event.target.value.trim()
-      this.filterQuery = inputValue
+      this.searchQuery = inputValue
     }, 200),
     handleSelectedFilter(filterName = '') {
-      this.filterType = filterName
+      this.filterStatusType = filterName
       this.$refs.searchInput.focus()
-    },
-    getFilteredTransactions(transactions) {
-      return transactions.filter((transaction) => {
-        const targetProperty = transaction[this.filterType]
-
-        const targetValue = isObject(targetProperty)
-          ? targetProperty.formatted
-          : targetProperty
-
-        const normalizedString = removeAccent(String(targetValue).toLowerCase())
-        const normalizedQuery = removeAccent(this.filterQuery.toLowerCase())
-
-        return normalizedString.includes(normalizedQuery)
-      })
-    },
-    groupTransactionsByDate(transactions) {
-      return groupArrayByProp('date', transactions)
     },
     parseTransactions(transactions) {
       const formatTransactionStatus = (transaction) => {
@@ -119,6 +102,23 @@ export default {
 
       return transactions.map(formatTransactionStatus)
     },
+    filterTransactions(transactions) {
+      return transactions.filter((transaction) => {
+        const targetProperty = transaction[this.filterStatusType]
+
+        const targetValue = isObject(targetProperty)
+          ? targetProperty.formatted
+          : targetProperty
+
+        const normalizedString = removeAccent(String(targetValue).toLowerCase())
+        const normalizedQuery = removeAccent(this.searchQuery.toLowerCase())
+
+        return normalizedString.includes(normalizedQuery)
+      })
+    },
+    groupTransactionsByDate(transactions) {
+      return groupArrayByProp('date', transactions)
+    },
     sortTransactions(transactions) {
       const formatTransactionItem = (transactionDate) => {
         const dayTransactions = transactions[transactionDate]
@@ -132,12 +132,12 @@ export default {
     },
   },
   computed: {
-    filters() {
-      const filters = Object.values(filterTypesEnum)
+    filterOptions() {
+      const filters = Object.values(filterStatusTypes)
 
-      const formatFilter = (filterType) => {
-        const filterName = filterTypesTexts[filterType]
-        return { name: filterName, value: filterType }
+      const formatFilter = (filterValue) => {
+        const filterName = filterStatusTypesTexts[filterValue]
+        return { name: filterName, value: filterValue }
       }
 
       return filters.map(formatFilter)
@@ -146,13 +146,13 @@ export default {
       const {
         originalTransactions,
         parseTransactions,
-        getFilteredTransactions,
+        filterTransactions,
         groupTransactionsByDate,
         sortTransactions,
       } = this
 
       const parsedTransactions = parseTransactions(originalTransactions)
-      const filteredTransactions = getFilteredTransactions(parsedTransactions)
+      const filteredTransactions = filterTransactions(parsedTransactions)
       const groupedTransactions = groupTransactionsByDate(filteredTransactions)
       const sortedTransactions = sortTransactions(groupedTransactions)
 

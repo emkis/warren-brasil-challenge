@@ -10,12 +10,12 @@ export const transactionStatusTexts = Object.freeze({
   [transactionStatusEnum.PROCESSED]: 'Concluída',
 })
 
-export const filterTypesEnum = Object.freeze({
-  TITLE: 'title',
-  STATUS: 'status',
+export const filterStatusTypes = Object.freeze({
+  ALL: '',
+  ...transactionStatusEnum,
 })
 
-export const filterTypesTexts = Object.freeze({
-  [filterTypesEnum.TITLE]: 'Título',
-  [filterTypesEnum.STATUS]: 'Status',
+export const filterStatusTypesTexts = Object.freeze({
+  [filterStatusTypes.ALL]: 'Todos',
+  ...transactionStatusTexts,
 })

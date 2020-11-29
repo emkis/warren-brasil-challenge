@@ -47,6 +47,14 @@ export default {
 .FilterOptions {
   display: flex;
   align-items: center;
+  gap: 6px;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &__option {
     padding: 5px 20px;
@@ -64,10 +72,6 @@ export default {
     &--active {
       color: $color-warren;
       background: rgba($color-warren, 0.2);
-    }
-
-    & + & {
-      margin-left: 10px;
     }
   }
 }

@@ -1,21 +1,18 @@
 <template>
   <span class="StatusTag" :class="[statusClass && `StatusTag--${statusClass}`]">
-    {{ statusText }}
+    {{ status.formatted }}
   </span>
 </template>
 
 <script>
-import { transactionStatusEnum, transactionStatusTexts } from '@/constants'
+import { transactionStatusEnum } from '@/constants'
 
 export default {
   name: 'StatusTag',
   props: {
-    status: { type: String, required: true },
+    status: { type: Object, required: true },
   },
   computed: {
-    statusText() {
-      return transactionStatusTexts[this.status]
-    },
     statusClass() {
       const cssClasses = {
         [transactionStatusEnum.CREATED]: 'created',
@@ -23,7 +20,7 @@ export default {
         [transactionStatusEnum.PROCESSED]: 'processed',
       }
 
-      return cssClasses[this.status]
+      return cssClasses[this.status.value]
     },
   },
 }

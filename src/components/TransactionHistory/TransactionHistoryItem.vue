@@ -1,14 +1,16 @@
 <template>
   <li class="TransactionHistoryItem" v-on="$listeners">
     <div class="TransactionHistoryItem__row">
-      <h3>{{ transaction.title }}</h3>
-      <h4>{{ formatAmount(transaction.amount) }}</h4>
+      <StatusTag :status="transaction.status" />
+      <h4 class="TransactionHistoryItem__amount">
+        {{ formatAmount(transaction.amount) }}
+      </h4>
     </div>
 
-    <div class="TransactionHistoryItem__row">
-      <p>{{ transaction.description }}</p>
-      <StatusTag :status="transaction.status.value" />
-    </div>
+    <h3 class="TransactionHistoryItem__title">{{ transaction.title }}</h3>
+    <p class="TransactionHistoryItem__description">
+      {{ transaction.description }}
+    </p>
   </li>
 </template>
 
@@ -30,24 +32,29 @@ export default {
 
 <style lang="scss" scoped>
 .TransactionHistoryItem {
-  padding: 20px;
+  padding: 25px 20px;
   border-radius: $radius-box;
   background: $color-gray-element;
   cursor: pointer;
 
   &__row {
-    $safeSpace: 30px;
-    display: grid;
-    grid-template-columns: 4fr $safeSpace 1fr;
-
-    :nth-child(2) {
-      grid-column: 3 / 4;
-      margin-left: auto;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $default-gutter;
   }
 
-  &__row + &__row {
-    margin-top: 10px;
+  &__amount,
+  &__title,
+  &__description {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  &__description {
+    margin-top: 6px;
+    font-size: 14px;
+    color: $color-gray-text;
   }
 
   &:hover {

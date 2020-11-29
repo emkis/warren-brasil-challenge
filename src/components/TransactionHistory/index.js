@@ -7,13 +7,22 @@ export default {
     isLoading: { type: Boolean, default: false },
     transactions: { type: Array, required: true },
   },
-  render(createElement, { props }) {
+  render(createElement, context) {
+    const { props, data } = context
     const { transactions, isLoading } = props
+    const { staticClass, attrs } = data
 
     if (isLoading) {
-      return createElement(TransactionHistoryPlaceholder)
+      return createElement(TransactionHistoryPlaceholder, {
+        attrs,
+        staticClass,
+      })
     }
 
-    return createElement(TransactionHistory, { props: { transactions } })
+    return createElement(TransactionHistory, {
+      attrs,
+      staticClass,
+      props: { transactions },
+    })
   },
 }

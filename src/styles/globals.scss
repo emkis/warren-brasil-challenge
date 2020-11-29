@@ -20,3 +20,9 @@ h4,
 h5 {
   font-family: $font-title;
 }
+
+.container {
+  margin: 0 auto;
+  max-width: 533px;
+  padding: 0 $default-gutter;
+}

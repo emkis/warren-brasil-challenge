@@ -40,12 +40,11 @@ export default {
 .AppInput {
   border: 0;
   padding: 0;
+  margin: 0;
 
   &__field {
-    $border-size: 2px;
-    border: $border-size solid transparent;
+    border: 2px solid transparent;
     width: 100%;
-    max-width: 300px;
     min-height: 40px;
     padding: 0 23px;
     border-radius: $radius-box;
@@ -53,10 +52,11 @@ export default {
     font-weight: 400;
     background: $color-gray-element;
     transition: border $default-transition;
-    outline: none;
 
-    &:focus {
-      border: $border-size solid $color-gray-text;
+    &:focus,
+    &:focus-within {
+      outline: none;
+      border-color: $color-gray-text;
     }
 
     &::placeholder {

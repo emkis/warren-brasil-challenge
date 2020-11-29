@@ -46,6 +46,7 @@ export default {
   methods: {
     handleTransactionClick(transaction) {
       openModal({
+        modalTitle: 'Resumo de transação',
         component: TransactionDetails,
         props: { transaction },
       })

@@ -32,14 +32,15 @@ export default {
 <style lang="scss" scoped>
 .StatusTag {
   --bg: #333;
-  display: inline-block;
-  height: 20px;
+  display: grid;
+  place-items: center;
   width: fit-content;
   max-width: 150px;
-  padding: 3px 13px;
+  min-height: 24px;
+  padding: 0 13px;
   border-radius: 20px;
   font-size: 13px;
-  line-height: 1;
+  line-height: 1.3;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;

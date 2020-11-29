@@ -44,6 +44,8 @@ export default {
   &__field {
     $border-size: 2px;
     border: $border-size solid transparent;
+    width: 100%;
+    max-width: 300px;
     min-height: 40px;
     padding: 0 23px;
     border-radius: $radius-box;

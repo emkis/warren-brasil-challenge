@@ -1,5 +1,10 @@
 <template>
-  <Modal v-if="component" :isClosable="isClosable" @close="onClose">
+  <Modal
+    v-if="component"
+    :title="modalTitle"
+    :isClosable="isClosable"
+    @close="onClose"
+  >
     <component :is="component" v-bind="componentProps" />
   </Modal>
 </template>
@@ -19,6 +24,7 @@ export default {
       component: null,
       componentProps: null,
       isClosable: true,
+      modalTitle: null,
     }
   },
   mounted() {
@@ -29,10 +35,11 @@ export default {
       EventBus.$on(OPEN, this.onOpen)
       EventBus.$on(CLOSE, this.onClose)
     },
-    onOpen({ component, props, isClosable = true }) {
+    onOpen({ component, props, isClosable = true, modalTitle }) {
       this.component = component
       this.componentProps = props
       this.isClosable = isClosable
+      this.modalTitle = modalTitle
     },
     onClose() {
       this.resetState()
@@ -41,6 +48,7 @@ export default {
       this.component = null
       this.componentProps = null
       this.isClosable = true
+      this.modalTitle = null
     },
   },
   watch: {

@@ -26,7 +26,7 @@ export default {
 .TransactionHistoryGroup {
   &__title {
     font-size: 16px;
-    margin-bottom: 13px;
+    margin-bottom: $default-gutter;
   }
 
   &__list {

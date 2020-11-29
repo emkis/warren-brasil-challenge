@@ -36,7 +36,6 @@ import {
   transactionStatusTexts,
 } from '@/constants'
 import { removeAccent, groupArrayByProp, asyncDelay } from '@/utilities'
-import { isObject } from '@/utilities/checkers'
 import { TransactionService } from '@/services/TransactionService'
 
 import AppInput from '@/components/AppInput'
@@ -83,7 +82,7 @@ export default {
       this.searchQuery = inputValue
     }, 200),
     handleSelectedFilter(filterName = '') {
-      this.filterStatusType = filterName
+      this.statusFilter = filterName
       this.$refs.searchInput.focus()
     },
     parseTransactions(transactions) {
@@ -102,18 +101,22 @@ export default {
 
       return transactions.map(formatTransactionStatus)
     },
-    filterTransactions(transactions) {
+    filterTransactionStatus(transactions) {
       return transactions.filter((transaction) => {
-        const targetProperty = transaction[this.filterStatusType]
+        const currentStatus = this.statusFilter
+        const targetStatus = transaction.status.value
 
-        const targetValue = isObject(targetProperty)
-          ? targetProperty.formatted
-          : targetProperty
+        return targetStatus.includes(currentStatus)
+      })
+    },
+    filterTransactionTitles(transactions) {
+      return transactions.filter((transaction) => {
+        const { title } = transaction
 
-        const normalizedString = removeAccent(String(targetValue).toLowerCase())
+        const normalizedTitle = removeAccent(title).toLowerCase()
         const normalizedQuery = removeAccent(this.searchQuery.toLowerCase())
 
-        return normalizedString.includes(normalizedQuery)
+        return normalizedTitle.includes(normalizedQuery)
       })
     },
     groupTransactionsByDate(transactions) {
@@ -146,13 +149,19 @@ export default {
       const {
         originalTransactions,
         parseTransactions,
-        filterTransactions,
+        filterTransactionStatus,
+        filterTransactionTitles,
         groupTransactionsByDate,
         sortTransactions,
       } = this
 
       const parsedTransactions = parseTransactions(originalTransactions)
-      const filteredTransactions = filterTransactions(parsedTransactions)
+      const filteredStatusTransactions = filterTransactionStatus(
+        parsedTransactions
+      )
+      const filteredTransactions = filterTransactionTitles(
+        filteredStatusTransactions
+      )
       const groupedTransactions = groupTransactionsByDate(filteredTransactions)
       const sortedTransactions = sortTransactions(groupedTransactions)
 

@@ -24,36 +24,33 @@ export default { name: 'TransactionHistoryPlaceholder' }
 
 <style lang="scss" scoped>
 .TransactionHistoryPlaceholder {
-  --square-height: 16px;
-  --gap: 13px;
-
+  $square-height: 17px;
   display: grid;
-  gap: var(--gap);
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  gap: $default-gutter;
 
   &__title {
     width: 100px;
   }
 
   &__block {
-    min-height: var(--square-height);
-    background: #909090;
+    min-height: $square-height;
     border-radius: $radius-box;
+    background: $color-gray-element;
     animation: pulse 1s ease-in-out alternate infinite;
   }
 
   &__block--grid {
     display: grid;
-    gap: var(--gap);
-    grid-template-rows: repeat(2, var(--square-height));
+    gap: $default-gutter;
+    grid-template-rows: repeat(3, $square-height);
     grid-template-columns: repeat(12, 1fr);
-    padding: 23px 30px;
+    place-content: center;
+    min-height: 139px;
+    padding: 24px 20px;
 
     :nth-child(1) {
       grid-row: 1 / 2;
-      grid-column: 1 / 5;
+      grid-column: 1 / 4;
     }
 
     :nth-child(2) {
@@ -63,33 +60,28 @@ export default { name: 'TransactionHistoryPlaceholder' }
 
     :nth-child(3) {
       grid-row: 2 / 3;
-      grid-column: 1 / 7;
+      grid-column: 1 / 5;
     }
 
     :nth-child(4) {
-      grid-row: 2 / 3;
-      grid-column: 11 / 13;
+      grid-row: 3 / 4;
+      grid-column: 1 / 8;
     }
   }
 
   &__inner-square {
     border-radius: 50px;
-    min-height: var(--square-height);
-    background: #000;
+    background: $color-gray-placeholder-square;
   }
 
   @keyframes pulse {
     from {
-      opacity: 0.1;
+      opacity: 0.6;
     }
 
     to {
-      opacity: 0.3;
+      opacity: 10;
     }
-  }
-
-  @media (min-width: 768px) {
-    --square-height: 20px;
   }
 }
 </style>

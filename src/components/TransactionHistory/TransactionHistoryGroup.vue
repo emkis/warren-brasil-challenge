@@ -1,6 +1,6 @@
 <template>
   <section class="TransactionHistoryGroup">
-    <h2 class="TransactionHistoryGroup__title">{{ formatDate(title) }}</h2>
+    <h3 class="TransactionHistoryGroup__title">{{ formatDate(title) }}</h3>
 
     <ol class="TransactionHistoryGroup__list">
       <slot />

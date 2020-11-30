@@ -155,9 +155,13 @@ export default {
     }
   }
 
+  &__filter-group {
+    margin-top: $default-gutter * 2;
+  }
+
   &__filter-label {
     display: block;
-    font-size: 14px;
+    font-size: 16px;
     font-family: $font-title;
     font-weight: 500;
     line-height: 1.5;

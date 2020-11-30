@@ -32,7 +32,7 @@ export default {
 
 <style lang="scss" scoped>
 .TransactionHistoryItem {
-  padding: 25px 20px;
+  padding: 24px 20px;
   border-radius: $radius-box;
   background: $color-gray-element;
   cursor: pointer;
@@ -48,17 +48,15 @@ export default {
   &__title,
   &__description {
     font-size: 16px;
+    font-weight: 500;
     line-height: 1.5;
   }
 
   &__description {
     margin-top: 6px;
     font-size: 14px;
+    font-weight: 400;
     color: $color-gray-text;
-  }
-
-  &:hover {
-    opacity: 0.8;
   }
 }
 </style>

@@ -38,7 +38,7 @@ export default {
   display: flex;
   place-content: center;
   padding: 10px 20px;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   border-radius: $radius-box;
   font-family: $font-title;
   font-weight: 400;

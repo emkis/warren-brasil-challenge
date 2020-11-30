@@ -68,7 +68,7 @@ export default {
   height: 100%;
   display: grid;
   place-items: center;
-  background: rgba(#000, 0.53);
+  background: $color-bg-overlay;
   z-index: 1;
 
   &__header {

@@ -132,22 +132,23 @@ export default {
 
       return transactions.map(formatTransactionStatus)
     },
-    filterTransactionStatus(transactions) {
-      return transactions.filter((transaction) => {
-        const currentStatus = this.statusFilter
-        const targetStatus = transaction.status.value
-
-        return targetStatus.includes(currentStatus)
-      })
+    isStatusTheSameAsFilter(transaction) {
+      return transaction.status.value.includes(this.statusFilter)
     },
-    filterTransactionTitles(transactions) {
+    isTitleMatchQuery(transaction) {
+      const { title } = transaction
+
+      const normalizedTitle = removeAccent(title).toLowerCase()
+      const normalizedQuery = removeAccent(this.searchQuery.toLowerCase())
+
+      return normalizedTitle.includes(normalizedQuery)
+    },
+    filterTransactions(transactions) {
+      const { isStatusTheSameAsFilter, isTitleMatchQuery } = this
+
       return transactions.filter((transaction) => {
-        const { title } = transaction
-
-        const normalizedTitle = removeAccent(title).toLowerCase()
-        const normalizedQuery = removeAccent(this.searchQuery.toLowerCase())
-
-        return normalizedTitle.includes(normalizedQuery)
+        if (!isStatusTheSameAsFilter(transaction)) return
+        return isTitleMatchQuery(transaction)
       })
     },
     groupTransactionsByDate(transactions) {
@@ -180,19 +181,13 @@ export default {
       const {
         originalTransactions,
         parseTransactions,
-        filterTransactionStatus,
-        filterTransactionTitles,
+        filterTransactions,
         groupTransactionsByDate,
         sortTransactions,
       } = this
 
       const parsedTransactions = parseTransactions(originalTransactions)
-      const filteredStatusTransactions = filterTransactionStatus(
-        parsedTransactions
-      )
-      const filteredTransactions = filterTransactionTitles(
-        filteredStatusTransactions
-      )
+      const filteredTransactions = filterTransactions(parsedTransactions)
       const groupedTransactions = groupTransactionsByDate(filteredTransactions)
       const sortedTransactions = sortTransactions(groupedTransactions)
 

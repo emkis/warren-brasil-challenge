@@ -1,18 +1,26 @@
 <template>
   <div class="TransactionDetails">
-    <h2>{{ transaction.title }}</h2>
-    <TransactionProgressBar :status="transaction.status.value" />
+    <TransactionProgressBar
+      class="TransactionDetails__progress"
+      :status="transaction.status.value"
+    />
 
-    <br /><br />
-    <h3>Transferido de:</h3>
-    <p>{{ transaction.from }}</p>
-    <p>{{ formatAmount(transaction.amount) }}</p>
+    <div class="TransactionDetails__group">
+      <h3 class="TransactionDetails__title">Transferido de:</h3>
+      <p class="TransactionDetails__description">{{ transaction.from }}</p>
+    </div>
 
-    <br /><br />
+    <div class="TransactionDetails__group">
+      <h3 class="TransactionDetails__title">Para:</h3>
+      <p class="TransactionDetails__description">{{ transaction.to }}</p>
+    </div>
 
-    <h3>Para:</h3>
-    <p>{{ transaction.to }}</p>
-    <p>{{ formatAmount(transaction.amount) }}</p>
+    <div class="TransactionDetails__group">
+      <h3 class="TransactionDetails__title">Valor:</h3>
+      <p class="TransactionDetails__description">
+        {{ formatAmount(transaction.amount) }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -34,12 +42,33 @@ export default {
 
 <style lang="scss" scoped>
 .TransactionDetails {
-  padding: 60px;
-  background: white;
-  min-width: 500px;
+  min-width: 318px;
+  padding: ($default-gutter * 3);
+  background: $color-background;
+  line-height: 1.5;
 
-  .TransactionProgressBar {
-    margin: 26px 0;
+  &__progress {
+    margin: 0 25px 50px;
+  }
+
+  &__title {
+    margin-bottom: 6px;
+    font-size: 20px;
+    font-weight: 700;
+    color: $color-black;
+  }
+
+  &__description {
+    font-size: 16px;
+    color: $color-black;
+  }
+
+  &__group + &__group {
+    margin-top: $default-gutter * 1.4375;
+  }
+
+  @media (min-width: 600px) {
+    min-width: 521px;
   }
 }
 </style>

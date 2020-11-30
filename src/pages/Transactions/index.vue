@@ -50,13 +50,10 @@
 <script>
 import { debounce } from 'debounce'
 
-import {
-  filterStatusTypes,
-  filterStatusTypesTexts,
-  transactionStatusTexts,
-} from '@/constants'
-import { removeAccent, groupArrayByProp, asyncDelay } from '@/utilities'
+import { asyncDelay } from '@/utilities'
+import { filterStatusTypes } from '@/constants'
 import { TransactionService } from '@/services/TransactionService'
+import { statusFilters } from './filters'
 
 import AppInput from '@/components/AppInput'
 import AppButton from '@/components/AppButton'
@@ -116,82 +113,17 @@ export default {
     toggleFiltersVisibility() {
       this.isFiltersVisible = !this.isFiltersVisible
     },
-    parseTransactions(transactions) {
-      const formatTransactionStatus = (transaction) => {
-        const statusValue = transaction.status
-        const formattedStatus = transactionStatusTexts[statusValue]
-
-        return {
-          ...transaction,
-          status: {
-            value: statusValue,
-            formatted: formattedStatus,
-          },
-        }
-      }
-
-      return transactions.map(formatTransactionStatus)
-    },
-    isStatusTheSameAsFilter(transaction) {
-      return transaction.status.value.includes(this.statusFilter)
-    },
-    isTitleMatchQuery(transaction) {
-      const { title } = transaction
-
-      const normalizedTitle = removeAccent(title).toLowerCase()
-      const normalizedQuery = removeAccent(this.searchQuery.toLowerCase())
-
-      return normalizedTitle.includes(normalizedQuery)
-    },
-    filterTransactions(transactions) {
-      const { isStatusTheSameAsFilter, isTitleMatchQuery } = this
-
-      return transactions.filter((transaction) => {
-        if (!isStatusTheSameAsFilter(transaction)) return
-        return isTitleMatchQuery(transaction)
-      })
-    },
-    groupTransactionsByDate(transactions) {
-      return groupArrayByProp('date', transactions)
-    },
-    sortTransactions(transactions) {
-      const formatTransactionItem = (transactionDate) => {
-        const dayTransactions = transactions[transactionDate]
-        return { date: transactionDate, transactions: dayTransactions }
-      }
-
-      return Object.keys(transactions)
-        .sort()
-        .reverse()
-        .map(formatTransactionItem)
-    },
   },
   computed: {
     filterOptions() {
-      const filters = Object.values(filterStatusTypes)
-
-      const formatFilter = (filterValue) => {
-        const filterName = filterStatusTypesTexts[filterValue]
-        return { name: filterName, value: filterValue }
-      }
-
-      return filters.map(formatFilter)
+      return statusFilters.getOptions()
     },
     transactions() {
-      const {
-        originalTransactions,
-        parseTransactions,
-        filterTransactions,
-        groupTransactionsByDate,
-        sortTransactions,
-      } = this
-
-      const parsedTransactions = parseTransactions(originalTransactions)
-      const filteredTransactions = filterTransactions(parsedTransactions)
-      const groupedTransactions = groupTransactionsByDate(filteredTransactions)
-      const sortedTransactions = sortTransactions(groupedTransactions)
-
-      return sortedTransactions
+      return statusFilters.getFilteredTransactions({
+        transactions: this.originalTransactions,
+        searchQuery: this.searchQuery,
+        statusFilter: this.statusFilter,
+      })
     },
   },
 }

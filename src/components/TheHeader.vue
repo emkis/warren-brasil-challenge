@@ -2,19 +2,18 @@
   <header class="TheHeader">
     <div class="TheHeader__inner container">
       <WarrenLogo aria-label="Warren Challenge" class="TheHeader__logo" />
-
-      <TheThemeSwitcher />
+      <ThemeSwitcher />
     </div>
   </header>
 </template>
 
 <script>
 import WarrenLogo from '@/assets/warren-logo.svg'
-import TheThemeSwitcher from '@/components/TheThemeSwitcher'
+import ThemeSwitcher from '@/components/ThemeSwitcher'
 
 export default {
   name: 'TheHeader',
-  components: { WarrenLogo, TheThemeSwitcher },
+  components: { WarrenLogo, ThemeSwitcher },
 }
 </script>
 

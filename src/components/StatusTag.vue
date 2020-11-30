@@ -1,26 +1,20 @@
 <template>
-  <span class="StatusTag" :class="[statusClass && `StatusTag--${statusClass}`]">
+  <span class="StatusTag" :class="[`StatusTag--${status.value}`]">
     {{ status.formatted }}
   </span>
 </template>
 
 <script>
-import { transactionStatusEnum } from '@/constants'
-
 export default {
   name: 'StatusTag',
   props: {
-    status: { type: Object, required: true },
-  },
-  computed: {
-    statusClass() {
-      const cssClasses = {
-        [transactionStatusEnum.CREATED]: 'created',
-        [transactionStatusEnum.PROCESSING]: 'processing',
-        [transactionStatusEnum.PROCESSED]: 'processed',
-      }
-
-      return cssClasses[this.status.value]
+    status: {
+      type: Object,
+      required: true,
+      validator(prop) {
+        const hasRequiredProps = 'value' in prop && 'formatted' in prop
+        if (hasRequiredProps) return true
+      },
     },
   },
 }

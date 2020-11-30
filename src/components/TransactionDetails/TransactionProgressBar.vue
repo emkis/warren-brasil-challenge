@@ -22,7 +22,10 @@
 </template>
 
 <script>
-import { transactionStatusEnum, transactionStatusTexts } from '@/constants'
+import {
+  transactionStatusEnum,
+  transactionStatusFormattedTexts,
+} from '@/constants'
 
 export default {
   name: 'TransactionProgressBar',
@@ -37,7 +40,7 @@ export default {
         return {
           progress: (statusIndex / (totalSteps - 1)) * 100,
           status,
-          text: transactionStatusTexts[status],
+          text: transactionStatusFormattedTexts[status],
         }
       })
     },

@@ -1,0 +1,22 @@
+[data-theme=light] {
+  --app-bg: var(--color-white);
+  --primary-text: var(--color-black);
+  --secondary-text: var(--color-scorpion);
+  --input-focus: var(--color-scorpion);
+  --accent: var(--color-amaranth);
+  --accent-20: var(--color-amaranth-20);
+  --accent-50: var(--color-amaranth-50);
+  --tag-info: var(--color-dodger-blue);
+  --tag-success: var(--color-jade);
+  --tag-pending: var(--color-christine);
+  --element-hover: var(--color-alto);
+  --element-bg: var(--color-gallery);
+  --button-default: var(--color-gallery);
+  --button-selected: var(--color-amaranth-20);
+  --button-selected-border: transparent;
+  --button-selected-text: var(--color-amaranth);
+  --progress-bar: var(--color-silver);
+  --modal-overlay: var(--color-overlay-70);
+  --switcher-circle: var(--accent);
+}
+

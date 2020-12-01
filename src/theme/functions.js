@@ -22,7 +22,7 @@ export function getStoredTheme() {
 }
 
 export function isUserSystemDarkThemeActive() {
-  return window.matchMedia('prefers-color-scheme: dark').matches
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
 }
 
 export function initTheme() {

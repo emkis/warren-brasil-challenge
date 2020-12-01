@@ -44,7 +44,7 @@ export const filters = {
   groupTransactionsByDate(transactions) {
     return groupArrayByProp('date', transactions)
   },
-  sortTransactions(transactions) {
+  sortTransactionsDate(transactions) {
     const formatTransactionItem = (transactionDate) => {
       const thisDayTransactions = transactions[transactionDate]
       return { date: transactionDate, transactions: thisDayTransactions }
@@ -65,7 +65,7 @@ export const filters = {
       filteredTransactions
     )
 
-    const sortedTransactions = this.sortTransactions(groupedTransactions)
+    const sortedTransactions = this.sortTransactionsDate(groupedTransactions)
 
     return sortedTransactions
   },

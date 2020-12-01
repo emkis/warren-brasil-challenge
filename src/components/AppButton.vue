@@ -1,10 +1,5 @@
 <template>
-  <button
-    :type="type"
-    v-on="$listeners"
-    class="AppButton"
-    :class="[`AppButton--${theme}`]"
-  >
+  <button :type="type" v-on="$listeners" class="AppButton" :class="themeClass">
     <slot />
   </button>
 </template>
@@ -30,6 +25,12 @@ export default {
       },
     },
   },
+  computed: {
+    themeClass() {
+      const theme = this.theme || themesEnum.DEFAULT
+      return `AppButton--${theme}`
+    },
+  },
 }
 </script>
 
@@ -38,22 +39,25 @@ export default {
   display: flex;
   place-content: center;
   padding: 10px 20px;
-  border: 1px solid transparent;
+  border: 1px solid var(--border, transparent);
   border-radius: $radius-box;
   font-family: $font-title;
   font-weight: 400;
+  color: var(--color);
+  background: var(--bg);
   transition: background $default-transition, color $default-transition,
     border $default-transition;
   cursor: pointer;
 
   &--default {
-    color: $color-black;
-    background: $color-gray-element;
+    --color: var(--primary-text);
+    --bg: var(--element-bg);
   }
 
   &--selected {
-    color: $color-warren;
-    background: rgba($color-warren, 0.2);
+    --color: var(--button-selected-text);
+    --bg: var(--accent-20);
+    --border: var(--button-selected-border);
   }
 }
 </style>

@@ -1,18 +1,18 @@
 <template>
   <div class="TransactionHistoryPlaceholder">
     <div
-      class="TransactionHistoryPlaceholder__block TransactionHistoryPlaceholder__title"
+      class="TransactionHistoryPlaceholder__block TransactionHistoryPlaceholder__title theme-transition"
     />
 
     <div
       :key="blockItem"
       v-for="blockItem in 10"
-      class="TransactionHistoryPlaceholder__block TransactionHistoryPlaceholder__block--grid"
+      class="TransactionHistoryPlaceholder__block TransactionHistoryPlaceholder__block--grid theme-transition"
     >
       <div
         :key="innerSquare"
         v-for="innerSquare in 4"
-        class="TransactionHistoryPlaceholder__inner-square"
+        class="TransactionHistoryPlaceholder__inner-square theme-transition"
       />
     </div>
   </div>
@@ -35,7 +35,7 @@ export default { name: 'TransactionHistoryPlaceholder' }
   &__block {
     min-height: $square-height;
     border-radius: $radius-box;
-    background: $color-gray-element;
+    background: var(--element-bg);
     animation: pulse 1s ease-in-out alternate infinite;
   }
 
@@ -71,7 +71,7 @@ export default { name: 'TransactionHistoryPlaceholder' }
 
   &__inner-square {
     border-radius: 50px;
-    background: $color-gray-placeholder-square;
+    background: var(--placeholder-square);
   }
 
   @keyframes pulse {

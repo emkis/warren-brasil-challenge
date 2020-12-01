@@ -44,7 +44,8 @@ export default {
 .TransactionDetails {
   min-width: 318px;
   padding: ($default-gutter * 3);
-  background: $color-background;
+  background: var(--app-bg);
+  color: var(--primary-text);
   line-height: 1.5;
 
   &__progress {
@@ -55,12 +56,10 @@ export default {
     margin-bottom: 6px;
     font-size: 20px;
     font-weight: 700;
-    color: $color-black;
   }
 
   &__description {
     font-size: 16px;
-    color: $color-black;
   }
 
   &__group + &__group {

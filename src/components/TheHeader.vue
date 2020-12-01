@@ -20,8 +20,7 @@ export default {
 <style lang="scss" scoped>
 .TheHeader {
   padding: 17px 0;
-  color: $color-white;
-  background: $color-warren;
+  background: var(--accent);
 
   &__inner {
     display: flex;
@@ -30,7 +29,7 @@ export default {
   }
 
   &__logo {
-    fill: $color-white;
+    fill: var(--app-bg);
   }
 }
 </style>

@@ -26,6 +26,7 @@ export default {
 .TransactionHistoryGroup {
   &__title {
     font-size: 16px;
+    color: var(--primary-text);
     margin-bottom: $default-gutter;
   }
 

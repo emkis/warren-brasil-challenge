@@ -9,7 +9,7 @@
       v-bind="$attrs"
       v-on="$listeners"
       :value="value"
-      class="AppInput__field"
+      class="AppInput__field theme-transition"
     />
   </fieldset>
 </template>
@@ -50,17 +50,17 @@ export default {
     border-radius: $radius-box;
     font-family: $font-title;
     font-weight: 400;
-    background: $color-gray-element;
-    transition: border $default-transition;
+    color: var(--primary-text);
+    background: var(--element-bg);
 
     &:focus,
     &:focus-within {
       outline: none;
-      border-color: $color-gray-text;
+      border-color: var(--input-focus);
     }
 
     &::placeholder {
-      color: $color-gray-text;
+      color: var(--secondary-text);
     }
   }
 }

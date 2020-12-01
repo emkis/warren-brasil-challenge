@@ -8,7 +8,7 @@
         title="Close"
         @click="handleClose"
       >
-        <IconClose size="14" color="#606060" />
+        <IconClose size="14" />
       </button>
 
       <header v-if="title" class="Modal__header">
@@ -68,19 +68,19 @@ export default {
   height: 100%;
   display: grid;
   place-items: center;
-  background: $color-bg-overlay;
+  background: var(--modal-overlay);
   z-index: 1;
 
   &__header {
     padding: 22px;
     text-align: center;
-    background: $color-gray-element;
+    background: var(--element-bg);
   }
 
   &__title {
     font-size: 16px;
     line-height: 1.5;
-    color: $color-black;
+    color: var(--primary-text);
   }
 
   &__exit-btn {
@@ -99,11 +99,12 @@ export default {
     padding: 10px;
     font-size: 20px;
     background: none;
+    color: var(--secondary-text);
     transition: background ease 200ms;
     cursor: pointer;
 
     &:hover {
-      background: #ddd;
+      background: var(--element-hover);
     }
   }
 

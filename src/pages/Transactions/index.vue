@@ -132,6 +132,7 @@ export default {
 <style lang="scss" scoped>
 .Transactions {
   padding: ($default-gutter * 3) ($default-gutter);
+  color: var(--primary-text);
 
   > * + * {
     margin-top: $default-gutter;
@@ -140,6 +141,7 @@ export default {
   &__title {
     margin-bottom: $default-gutter * 2;
     font-size: 24px;
+    color: var(--primary-text);
   }
 
   &__filter-button svg {

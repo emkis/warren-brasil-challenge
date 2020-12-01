@@ -3,7 +3,7 @@
     <button
       :key="option.value"
       v-for="option in options"
-      class="FilterOptions__option"
+      class="FilterOptions__option theme-transition"
       :class="{
         'FilterOptions__option--active': option.value === activeOption,
       }"
@@ -57,21 +57,25 @@ export default {
   }
 
   &__option {
+    --color: var(--secondary-text);
+    --bg: var(--element-bg);
+    --border: transparent;
+
     padding: 5px 20px;
     font-size: 14px;
     font-family: $font-title;
     font-weight: 500;
     line-height: 1.5;
-    color: $color-gray-text;
+    color: var(--color);
     border-radius: 50px;
-    border: 1px solid transparent;
-    background: $color-gray-element;
-    transition: background $default-transition, color $default-transition;
+    border: 1px solid var(--border);
+    background: var(--bg);
     cursor: pointer;
 
     &--active {
-      color: $color-warren;
-      background: rgba($color-warren, 0.2);
+      --color: var(--button-selected-text);
+      --bg: var(--accent-20);
+      --border: var(--button-selected-border);
     }
   }
 }

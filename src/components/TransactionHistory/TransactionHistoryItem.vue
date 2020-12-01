@@ -1,5 +1,5 @@
 <template>
-  <li class="TransactionHistoryItem" v-on="$listeners">
+  <li class="TransactionHistoryItem theme-transition" v-on="$listeners">
     <div class="TransactionHistoryItem__row">
       <StatusTag :status="transaction.status" />
       <h4 class="TransactionHistoryItem__amount">
@@ -34,7 +34,8 @@ export default {
 .TransactionHistoryItem {
   padding: 24px 20px;
   border-radius: $radius-box;
-  background: $color-gray-element;
+  background: var(--element-bg);
+  color: var(--primary-text);
   cursor: pointer;
 
   &__row {
@@ -56,7 +57,7 @@ export default {
     margin-top: 6px;
     font-size: 14px;
     font-weight: 400;
-    color: $color-gray-text;
+    color: var(--secondary-text);
   }
 }
 </style>

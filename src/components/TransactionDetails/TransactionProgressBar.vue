@@ -71,14 +71,14 @@ export default {
     width: 100%;
     height: 6px;
     border-radius: 12px;
-    background: #00b563;
+    background: var(--accent);
     transform: translate(-50%, -50%);
     overflow: hidden;
   }
 
   &__progress {
     height: 100%;
-    background: rgb(207, 207, 207);
+    background: var(--progress-bar);
     transition: transform 200ms ease-in;
   }
 
@@ -91,25 +91,25 @@ export default {
     position: relative;
 
     &.complete #{$this}__small-circle {
-      background: #ffffff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 6px #4bc161;
+      background: var(--color-white);
+      box-shadow: 0 0 0 6px var(--accent);
     }
 
     &.complete #{$this}__label,
     &.active #{$this}__label {
-      color: #000;
+      color: var(--primary-text);
     }
 
     &.active #{$this}__small-circle {
-      background: #ffffff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 0 10px #44bd5a;
+      background: var(--color-white);
+      box-shadow: 0 0 0 8px var(--accent), 0 0 0 13px var(--accent-50);
     }
   }
 
   &__small-circle {
     $circleSize: 12px;
     position: relative;
-    background: #9d9d9d;
+    background: var(--progress-bar);
     width: $circleSize;
     height: $circleSize;
     border-radius: 100%;
@@ -124,8 +124,7 @@ export default {
     left: 50%;
     margin: 20px 0 0 0;
     font-size: 13px;
-    color: #969696;
-
+    color: var(--secondary-text);
     transform: translate(-50%, 0);
   }
 }

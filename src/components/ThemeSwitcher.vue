@@ -15,19 +15,28 @@
 </template>
 
 <script>
+import { getCurrentTheme, themesEnum, setTheme } from '@/theme'
 import { IconMoon, IconSun } from '@/components/icons'
 
 export default {
   name: 'ThemeSwitcher',
   components: { IconMoon, IconSun },
   data() {
+    const isLightMode = getCurrentTheme() === themesEnum.LIGHT
+
     return {
-      isActive: false,
+      isActive: isLightMode,
     }
   },
   methods: {
     toggleActiveState() {
       this.isActive = !this.isActive
+    },
+  },
+  watch: {
+    isActive(isActive) {
+      if (isActive) setTheme(themesEnum.LIGHT)
+      else setTheme(themesEnum.DARK)
     },
   },
 }
@@ -38,6 +47,7 @@ export default {
   border: 0;
   padding: 0;
   background: none;
+  cursor: pointer;
   $this: &;
   $circle-size: 17px;
 
@@ -46,7 +56,7 @@ export default {
     width: 45px;
     height: 24px;
     border-radius: 50px;
-    background: rgb(18, 18, 20);
+    background: var(--app-bg);
     transition: background $default-transition;
 
     &::after,
@@ -56,10 +66,10 @@ export default {
       width: $circle-size;
       height: $circle-size;
       top: 50%;
-      transform: translateY(-50%);
-      background: $color-white;
-      border-radius: 50%;
       left: 4px;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      background: var(--switcher-circle);
       transition: all $default-transition;
     }
   }
@@ -67,20 +77,18 @@ export default {
   &__icon-wrapper {
     display: grid;
     place-content: center;
-    color: $color-black;
-    background: none !important;
-    z-index: 2;
+    color: var(--app-bg);
+    z-index: 1;
   }
 
   &--active {
     #{$this}__circle::after,
     #{$this}__icon-wrapper {
       left: calc(50% + 1px);
-      background: $color-warren;
     }
 
     #{$this}__icon-wrapper {
-      color: $color-white;
+      color: var(--app-bg);
     }
   }
 }

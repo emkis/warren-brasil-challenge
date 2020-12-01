@@ -6,11 +6,11 @@ export function isThemeValid(themeName) {
 }
 
 export function setTheme(themeName) {
-  if (!isThemeValid(themeName)) return
-
+  const theme = isThemeValid(themeName) ? themeName : themesEnum.LIGHT
   const app = document.querySelector('#app')
-  app.setAttribute(THEME_APP_ATTRIBUTE, themeName)
-  storeTheme(themeName)
+
+  app.setAttribute(THEME_APP_ATTRIBUTE, theme)
+  storeTheme(theme)
 }
 
 export function storeTheme(themeName) {

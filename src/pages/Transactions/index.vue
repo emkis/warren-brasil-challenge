@@ -52,7 +52,7 @@ import { debounce } from 'debounce'
 import { asyncDelay } from '@/utilities'
 import { filterStatusTypes } from '@/constants'
 import { TransactionService } from '@/services/TransactionService'
-import { statusFilters } from './filters'
+import { filters } from './filters'
 
 import AppInput from '@/components/AppInput'
 import AppButton from '@/components/AppButton'
@@ -114,10 +114,10 @@ export default {
   },
   computed: {
     filterOptions() {
-      return statusFilters.getOptions()
+      return filters.getOptions()
     },
     transactions() {
-      return statusFilters.getFilteredTransactions({
+      return filters.getFilteredTransactions({
         transactions: this.originalTransactions,
         searchQuery: this.searchQuery,
         statusFilter: this.statusFilter,

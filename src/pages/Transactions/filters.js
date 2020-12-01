@@ -5,7 +5,7 @@ import {
 } from '@/constants'
 import { groupArrayByProp, removeAccent } from '@/utilities'
 
-export const statusFilters = {
+export const filters = {
   parseTransactions(transactions) {
     const formatTransactionStatus = (transaction) => {
       const statusValue = transaction.status

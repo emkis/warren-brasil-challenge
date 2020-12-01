@@ -12,8 +12,8 @@ A ideia da interface foi criada apenas me baseando nos requisitos, features e wi
 Sei que não era um requisito do desafio, mas eu amo design e interfaces lindas e usuais, então não queria deixar a oportunidade de fazer um app massa.
 
 ## Deploy
-Foi feito deploy da aplicação utilizando o serviço Netlify.
-**Acesse a aplicação online** está acessível por esse [**link aqui**](https://emkis-warren-challenge.netlify.app).
+O deploy da aplicação utilizando o serviço Netlify.
+A aplicação está online e acessível por esse [**link aqui**](https://emkis-warren-challenge.netlify.app).
 
 ## Métricas do LightHouse (Google)
 Auditando a aplicação em produção com o [LightHouse](https://developers.google.com/web/tools/lighthouse), em modo Desktop, os resultados alcançados foram esse:
@@ -74,7 +74,7 @@ Componentes como a "Modal" e o "Detalhe da Transação", que não são renderiza
 - `test:unit:watch`: Para executar os testes unitários sempre que houverem alterações.
 - `test:unit:coverage`: Para gerar o relatório de cobertura de testes.
 - `lint`: Executar o linter.
-- `report`: Executar a build do projeto e gerar página do Webpack Bundle Analyzer para analisar o bundle do projeto.
+- `report`: Executar a build do projeto e gerar página do `Webpack Bundle Analyzer` para saber detalhes do bundle.
 
 
 ### Observações

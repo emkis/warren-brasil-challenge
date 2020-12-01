@@ -7,7 +7,6 @@
         placeholder="Busque transações aqui"
         label="Busque transações aqui"
         :value="searchQuery"
-        ref="searchInput"
         @input="handleInputChange"
         autofocus
       />
@@ -108,7 +107,6 @@ export default {
     }, 200),
     handleSelectedFilter(filterName = '') {
       this.statusFilter = filterName
-      this.$refs.searchInput.focus()
     },
     toggleFiltersVisibility() {
       this.isFiltersVisible = !this.isFiltersVisible

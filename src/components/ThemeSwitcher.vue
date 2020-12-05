@@ -22,15 +22,20 @@ export default {
   name: 'ThemeSwitcher',
   components: { IconMoon, IconSun },
   data() {
-    const isLightMode = getCurrentTheme() === themesEnum.LIGHT
-
     return {
-      isActive: isLightMode,
+      isActive: true,
     }
+  },
+  mounted() {
+    this.checkAppTheme()
   },
   methods: {
     toggleActiveState() {
       this.isActive = !this.isActive
+    },
+    checkAppTheme() {
+      const isLightMode = getCurrentTheme() === themesEnum.LIGHT
+      this.isActive = isLightMode
     },
   },
   watch: {

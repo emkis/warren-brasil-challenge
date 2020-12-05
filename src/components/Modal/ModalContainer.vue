@@ -14,7 +14,9 @@ import { OPEN, CLOSE } from './busEvents'
 import { EventBus } from '@/eventBus'
 import { toggleAppScroll } from '@/utilities'
 
-const Modal = () => import(/* webpackChunkName: "Modal" */ '@/components/Modal')
+const Modal = () => {
+  return import(/* webpackChunkName: "Modal" */ '@/components/Modal/Modal')
+}
 
 export default {
   name: 'ModalContainer',

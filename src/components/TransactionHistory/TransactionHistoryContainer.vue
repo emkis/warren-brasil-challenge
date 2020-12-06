@@ -11,8 +11,9 @@ import { asyncDelay } from '@/utilities'
 import { TransactionService } from '@/services/TransactionService'
 import { filters } from '@/pages/Transactions/filters'
 
+import TransactionHistory from './TransactionHistory'
 import TransactionHistoryPlaceholder from './TransactionHistoryPlaceholder'
-import { TransactionHistory, TransactionHistoryError } from './lazyImports'
+import { TransactionHistoryError } from './lazyImports'
 
 export default {
   name: 'TransactionHistoryContainer',

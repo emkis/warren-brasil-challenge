@@ -9,7 +9,7 @@
 <script>
 import TheHeader from '@/components/TheHeader'
 import TransactionsPage from '@/pages/Transactions'
-import ModalContainer from '@/components/Modal/ModalContainer'
+import { ModalContainer } from '@/components/Modal'
 
 export default {
   name: 'App',

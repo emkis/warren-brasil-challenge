@@ -1,5 +1,5 @@
 <template>
-  <div class="TransactionHistory">
+  <div class="TransactionHistory" aria-label="Lista de transações">
     <template v-if="isTransactionListEmpty">
       <h2 class="TransactionHistory__message">Nenhuma transação encontrada</h2>
     </template>

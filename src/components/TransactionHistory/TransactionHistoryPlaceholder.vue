@@ -1,5 +1,8 @@
 <template>
-  <div class="TransactionHistoryPlaceholder">
+  <div
+    class="TransactionHistoryPlaceholder"
+    aria-label="Carregando a lista de transações"
+  >
     <div
       class="TransactionHistoryPlaceholder__block TransactionHistoryPlaceholder__title"
     />

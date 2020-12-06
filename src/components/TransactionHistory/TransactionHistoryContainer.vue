@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <component
-      :is="component"
-      v-bind="componentProps"
-      @on-fetch="fetchTransactions"
-    />
-  </div>
+  <component
+    :is="component"
+    v-bind="componentProps"
+    @on-fetch="fetchTransactions"
+  />
 </template>
 
 <script>

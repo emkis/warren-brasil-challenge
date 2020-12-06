@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { IconClose } from '@/components/icons'
+import { IconClose } from '@/components/Icons'
 
 export default {
   name: 'Modal',

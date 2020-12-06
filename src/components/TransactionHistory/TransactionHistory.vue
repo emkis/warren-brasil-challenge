@@ -28,7 +28,8 @@ import TransactionHistoryItem from './TransactionHistoryItem'
 
 const TransactionDetails = () => {
   return import(
-    /* webpackChunkName: "TransactionDetails" */ '@/components/TransactionDetails'
+    /* webpackChunkName: "TransactionDetails" */
+    '@/components/TransactionDetails/TransactionDetails'
   )
 }
 

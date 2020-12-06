@@ -58,7 +58,7 @@ import AppInput from '@/components/AppInput'
 import AppButton from '@/components/AppButton'
 import FilterOptions from '@/components/FilterOptions'
 import TransactionHistory from '@/components/TransactionHistory'
-import { IconFilter } from '@/components/icons'
+import { IconFilter } from '@/components/Icons'
 
 export default {
   name: 'TransactionsPage',

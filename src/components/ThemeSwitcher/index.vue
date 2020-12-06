@@ -16,7 +16,7 @@
 
 <script>
 import { getCurrentTheme, themesEnum, setTheme } from '@/theme'
-import { IconMoon, IconSun } from '@/components/icons'
+import { IconMoon, IconSun } from '@/components/Icons'
 
 export default {
   name: 'ThemeSwitcher',

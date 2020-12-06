@@ -70,6 +70,7 @@ export default {
     border-radius: 50px;
     border: 1px solid var(--border);
     background: var(--bg);
+    transition: border $default-transition;
     cursor: pointer;
 
     &--active {

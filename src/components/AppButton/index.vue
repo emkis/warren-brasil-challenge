@@ -45,8 +45,7 @@ export default {
   font-weight: 400;
   color: var(--color);
   background: var(--bg);
-  transition: background $default-transition, color $default-transition,
-    border $default-transition;
+  transition: border $default-transition;
   cursor: pointer;
 
   &--default {

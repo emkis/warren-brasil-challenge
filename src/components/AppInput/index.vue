@@ -1,5 +1,6 @@
 <template>
   <fieldset class="AppInput">
+    <legend class="sr-only">{{ label }}</legend>
     <label :for="uuid" class="sr-only">{{ label }}</label>
 
     <input

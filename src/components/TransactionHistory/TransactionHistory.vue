@@ -26,15 +26,10 @@
 
 <script>
 import { openModal } from '../Modal/busEvents'
+
 import TransactionHistoryGroup from './TransactionHistoryGroup'
 import TransactionHistoryItem from './TransactionHistoryItem'
-
-const TransactionDetails = () => {
-  return import(
-    /* webpackChunkName: "TransactionDetails" */
-    '@/components/TransactionDetails/TransactionDetails'
-  )
-}
+import { TransactionDetails } from './lazyImports'
 
 export default {
   name: 'TransactionHistory',

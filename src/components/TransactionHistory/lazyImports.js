@@ -3,3 +3,10 @@ export const TransactionHistoryError = () => {
     /* webpackChunkName: "TransactionHistoryError" */ './TransactionHistoryError'
   )
 }
+
+export const TransactionDetails = () => {
+  return import(
+    /* webpackChunkName: "TransactionDetails" */
+    '@/components/TransactionDetails/TransactionDetails'
+  )
+}

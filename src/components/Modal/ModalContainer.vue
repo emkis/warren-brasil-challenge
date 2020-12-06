@@ -15,7 +15,7 @@ import { EventBus } from '@/eventBus'
 import { toggleAppScroll } from '@/utilities'
 
 const Modal = () => {
-  return import(/* webpackChunkName: "Modal" */ '@/components/Modal/Modal')
+  return import(/* webpackChunkName: "Modal" */ '@/components/Modal')
 }
 
 export default {

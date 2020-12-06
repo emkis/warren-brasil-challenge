@@ -11,10 +11,13 @@
         :title="dateGroup.date"
       >
         <TransactionHistoryItem
+          tabindex="0"
+          role="button"
           :key="transaction.id"
           v-for="transaction in dateGroup.transactions"
           :transaction="transaction"
           @click="handleTransactionClick(transaction)"
+          @keydown.enter.space="handleTransactionClick(transaction)"
         />
       </TransactionHistoryGroup>
     </template>

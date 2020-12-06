@@ -3,7 +3,7 @@
     <button
       :key="option.value"
       v-for="option in options"
-      class="FilterOptions__option theme-transition"
+      class="FilterOptions__option"
       :class="{
         'FilterOptions__option--active': option.value === activeOption,
       }"

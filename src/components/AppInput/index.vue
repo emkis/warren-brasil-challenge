@@ -9,7 +9,7 @@
       v-bind="$attrs"
       v-on="$listeners"
       :value="value"
-      class="AppInput__field theme-transition"
+      class="AppInput__field"
     />
   </fieldset>
 </template>

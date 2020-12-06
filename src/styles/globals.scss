@@ -22,10 +22,6 @@ h5 {
   font-family: $font-title;
 }
 
-.theme-transition {
-  transition: background $default-transition,border-color $default-transition, color $default-transition;
-}
-
 .container {
   margin: 0 auto;
   max-width: 533px;

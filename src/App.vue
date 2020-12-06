@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="theme-transition">
+  <div id="app">
     <TheHeader />
     <TransactionsPage />
     <ModalContainer />

@@ -1,18 +1,18 @@
 <template>
   <div class="TransactionHistoryPlaceholder">
     <div
-      class="TransactionHistoryPlaceholder__block TransactionHistoryPlaceholder__title theme-transition"
+      class="TransactionHistoryPlaceholder__block TransactionHistoryPlaceholder__title"
     />
 
     <div
       :key="blockItem"
       v-for="blockItem in 10"
-      class="TransactionHistoryPlaceholder__block TransactionHistoryPlaceholder__block--grid theme-transition"
+      class="TransactionHistoryPlaceholder__block TransactionHistoryPlaceholder__block--grid"
     >
       <div
         :key="innerSquare"
         v-for="innerSquare in 4"
-        class="TransactionHistoryPlaceholder__inner-square theme-transition"
+        class="TransactionHistoryPlaceholder__inner-square"
       />
     </div>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <li class="TransactionHistoryItem theme-transition" v-on="$listeners">
+  <li class="TransactionHistoryItem" v-on="$listeners">
     <div class="TransactionHistoryItem__row">
       <StatusTag :status="transaction.status" />
       <h4 class="TransactionHistoryItem__amount">

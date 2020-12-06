@@ -37,11 +37,10 @@
       />
     </div>
 
-    <TransactionHistory
+    <TransactionHistoryContainer
       class="Transactions__history"
-      aria-label="Lista de transações"
-      :isLoading="isLoading"
-      :transactions="transactions"
+      :searchQuery="searchQuery"
+      :statusFilter="statusFilter"
     />
   </div>
 </template>
@@ -49,16 +48,14 @@
 <script>
 import { debounce } from 'debounce'
 
-import { asyncDelay } from '@/utilities'
 import { filterStatusTypes } from '@/constants'
-import { TransactionService } from '@/services/TransactionService'
 import { filters } from './filters'
 
 import AppInput from '@/components/AppInput'
 import AppButton from '@/components/AppButton'
-import FilterOptions from '@/components/FilterOptions'
-import TransactionHistory from '@/components/TransactionHistory'
 import { IconFilter } from '@/components/Icons'
+import FilterOptions from '@/components/FilterOptions'
+import TransactionHistoryContainer from '@/components/TransactionHistory/TransactionHistoryContainer'
 
 export default {
   name: 'TransactionsPage',
@@ -66,41 +63,17 @@ export default {
     AppInput,
     AppButton,
     FilterOptions,
-    TransactionHistory,
+    TransactionHistoryContainer,
     IconFilter,
   },
   data() {
     return {
-      isLoading: true,
-      hasError: false,
       isFiltersVisible: false,
-      originalTransactions: [],
       searchQuery: '',
       statusFilter: filterStatusTypes.ALL,
     }
   },
-  mounted() {
-    this.fetchTransactions()
-  },
   methods: {
-    async fetchTransactions() {
-      this.isLoading = true
-      this.hasError = false
-
-      try {
-        const [transactionsResponse] = await Promise.all([
-          TransactionService.fetchTransactions(),
-          asyncDelay(600),
-        ])
-
-        this.originalTransactions = transactionsResponse.data
-      } catch (error) {
-        this.hasError = true
-        throw new Error(error)
-      } finally {
-        this.isLoading = false
-      }
-    },
     handleInputChange: debounce(function (event) {
       const inputValue = event.target.value.trim()
       this.searchQuery = inputValue
@@ -115,13 +88,6 @@ export default {
   computed: {
     filterOptions() {
       return filters.getOptions()
-    },
-    transactions() {
-      return filters.getFilteredTransactions({
-        transactions: this.originalTransactions,
-        searchQuery: this.searchQuery,
-        statusFilter: this.statusFilter,
-      })
     },
   },
 }

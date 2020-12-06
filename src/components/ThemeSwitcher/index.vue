@@ -62,7 +62,6 @@ export default {
     height: 24px;
     border-radius: 50px;
     background: var(--app-bg);
-    transition: background $default-transition;
 
     &::after,
     #{$this}__icon-wrapper {
@@ -72,10 +71,10 @@ export default {
       height: $circle-size;
       top: 50%;
       left: 4px;
-      transform: translateY(-50%);
+      transform: translate(0, -50%);
       border-radius: 50%;
       background: var(--switcher-circle);
-      transition: all $default-transition;
+      transition: transform $default-transition;
     }
   }
 
@@ -89,7 +88,7 @@ export default {
   &--active {
     #{$this}__circle::after,
     #{$this}__icon-wrapper {
-      left: calc(50% + 1px);
+      transform: translate(125%, -50%);
     }
 
     #{$this}__icon-wrapper {

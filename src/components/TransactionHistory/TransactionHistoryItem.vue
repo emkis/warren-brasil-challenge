@@ -1,16 +1,18 @@
 <template>
   <li class="TransactionHistoryItem" v-on="$listeners">
-    <div class="TransactionHistoryItem__row">
-      <StatusTag :status="transaction.status" />
-      <h4 class="TransactionHistoryItem__amount">
-        {{ formatAmount(transaction.amount) }}
-      </h4>
-    </div>
+    <div tabindex="-1">
+      <div class="TransactionHistoryItem__row">
+        <StatusTag :status="transaction.status" />
+        <h4 class="TransactionHistoryItem__amount">
+          {{ formatAmount(transaction.amount) }}
+        </h4>
+      </div>
 
-    <h3 class="TransactionHistoryItem__title">{{ transaction.title }}</h3>
-    <p class="TransactionHistoryItem__description">
-      {{ transaction.description }}
-    </p>
+      <h3 class="TransactionHistoryItem__title">{{ transaction.title }}</h3>
+      <p class="TransactionHistoryItem__description">
+        {{ transaction.description }}
+      </p>
+    </div>
   </li>
 </template>
 
@@ -32,11 +34,24 @@ export default {
 
 <style lang="scss" scoped>
 .TransactionHistoryItem {
-  padding: 24px 20px;
-  border-radius: $radius-box;
-  background: var(--element-bg);
-  color: var(--primary-text);
   cursor: pointer;
+
+  &:focus,
+  &:focus-within {
+    outline: none;
+  }
+
+  &:focus > div {
+    border-color: var(--element-focus);
+  }
+
+  > div {
+    padding: 24px 20px;
+    border-radius: $radius-box;
+    background: var(--element-bg);
+    color: var(--primary-text);
+    border: 2px solid transparent;
+  }
 
   &__row {
     display: flex;

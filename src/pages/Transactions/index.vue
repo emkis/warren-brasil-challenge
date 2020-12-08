@@ -47,9 +47,7 @@
 
 <script>
 import { debounce } from 'debounce'
-
-import { filterStatusTypes } from '@/constants'
-import { filters } from './filters'
+import { filters, filterStatusTypes } from './filters'
 
 import AppInput from '@/components/AppInput'
 import AppButton from '@/components/AppButton'
@@ -68,8 +66,8 @@ export default {
   },
   data() {
     return {
-      isFiltersVisible: false,
       searchQuery: '',
+      isFiltersVisible: false,
       statusFilter: filterStatusTypes.ALL,
     }
   },

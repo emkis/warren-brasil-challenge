@@ -10,13 +10,11 @@
 </template>
 
 <script>
-import { OPEN, CLOSE } from './busEvents'
 import { EventBus } from '@/eventBus'
+import { OPEN, CLOSE } from './busEvents'
 import { toggleAppScroll } from '@/utilities'
 
-const Modal = () => {
-  return import(/* webpackChunkName: "Modal" */ '@/components/Modal')
-}
+import { Modal } from './lazyImports'
 
 export default {
   name: 'ModalContainer',

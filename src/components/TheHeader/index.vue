@@ -19,7 +19,7 @@ export default {
 
 <style lang="scss" scoped>
 .TheHeader {
-  padding: 17px 0;
+  padding: 20px 0;
   background: var(--accent);
 
   &__inner {

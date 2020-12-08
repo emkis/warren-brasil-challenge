@@ -60,6 +60,7 @@ export default {
 
   &__description {
     font-size: 16px;
+    color: var(--secondary-text);
   }
 
   &__group + &__group {

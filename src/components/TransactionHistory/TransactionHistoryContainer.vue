@@ -8,13 +8,14 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-import { filters } from '@/pages/Transactions/filters'
 
 import TransactionHistory from './TransactionHistory'
 import TransactionHistoryPlaceholder from './TransactionHistoryPlaceholder'
 import { TransactionHistoryError } from './lazyImports'
 
-const { mapState, mapActions } = createNamespacedHelpers('transactions')
+const { mapState, mapActions, mapGetters } = createNamespacedHelpers(
+  'transactions'
+)
 
 export default {
   name: 'TransactionHistoryContainer',
@@ -26,6 +27,7 @@ export default {
     this.fetchTransactions()
   },
   computed: {
+    ...mapGetters(['getFilteredTransactions']),
     ...mapState({
       rawTransactions: 'transactions',
       isLoading: 'isFetching',
@@ -38,11 +40,10 @@ export default {
     },
     componentProps() {
       if (this.isLoading || this.hasError) return null
-      return { transactions: this.filteredTransactions }
+      return { transactions: this.transactions }
     },
-    filteredTransactions() {
-      return filters.getFilteredTransactions({
-        transactions: this.rawTransactions,
+    transactions() {
+      return this.getFilteredTransactions({
         searchQuery: this.searchQuery,
         statusFilter: this.statusFilter,
       })

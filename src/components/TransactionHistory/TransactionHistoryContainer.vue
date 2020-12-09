@@ -7,13 +7,14 @@
 </template>
 
 <script>
-import { asyncDelay } from '@/utilities'
-import { TransactionService } from '@/services/TransactionService'
+import { createNamespacedHelpers } from 'vuex'
 import { filters } from '@/pages/Transactions/filters'
 
 import TransactionHistory from './TransactionHistory'
 import TransactionHistoryPlaceholder from './TransactionHistoryPlaceholder'
 import { TransactionHistoryError } from './lazyImports'
+
+const { mapState, mapActions } = createNamespacedHelpers('transactions')
 
 export default {
   name: 'TransactionHistoryContainer',
@@ -21,17 +22,15 @@ export default {
     searchQuery: { type: String, required: true },
     statusFilter: { type: String, required: true },
   },
-  data() {
-    return {
-      isLoading: true,
-      hasError: false,
-      rawTransactions: [],
-    }
-  },
-  mounted() {
+  beforeMount() {
     this.fetchTransactions()
   },
   computed: {
+    ...mapState({
+      rawTransactions: 'transactions',
+      isLoading: 'isFetching',
+      hasError: 'isFetchFailed',
+    }),
     component() {
       if (this.isLoading) return TransactionHistoryPlaceholder
       if (this.hasError) return TransactionHistoryError
@@ -50,24 +49,7 @@ export default {
     },
   },
   methods: {
-    async fetchTransactions() {
-      this.isLoading = true
-      this.hasError = false
-
-      try {
-        const [transactionsResponse] = await Promise.all([
-          TransactionService.fetchTransactions(),
-          asyncDelay(600),
-        ])
-
-        this.rawTransactions = transactionsResponse.data
-      } catch (error) {
-        this.hasError = true
-        throw new Error(error)
-      } finally {
-        this.isLoading = false
-      }
-    },
+    ...mapActions(['fetchTransactions']),
   },
 }
 </script>

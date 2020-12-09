@@ -4,7 +4,7 @@ export const transactionStatusEnum = Object.freeze({
   PROCESSED: 'processed',
 })
 
-export const transactionStatusFormattedTexts = Object.freeze({
+export const transactionStatusTexts = Object.freeze({
   [transactionStatusEnum.CREATED]: 'Solicitada',
   [transactionStatusEnum.PROCESSING]: 'Processando',
   [transactionStatusEnum.PROCESSED]: 'Concluída',

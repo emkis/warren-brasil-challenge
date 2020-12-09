@@ -1,7 +1,4 @@
-import {
-  transactionStatusEnum,
-  transactionStatusFormattedTexts,
-} from '@/constants'
+import { transactionStatusEnum, transactionStatusTexts } from '@/constants'
 import { groupArrayByProp, removeAccent } from '@/utilities'
 
 export const filterStatusTypes = Object.freeze({
@@ -9,16 +6,16 @@ export const filterStatusTypes = Object.freeze({
   ...transactionStatusEnum,
 })
 
-export const filterStatusTypesFormattedTexts = Object.freeze({
+export const filterStatusTypeTexts = Object.freeze({
   [filterStatusTypes.ALL]: 'Todos',
-  ...transactionStatusFormattedTexts,
+  ...transactionStatusTexts,
 })
 
 export const filters = {
   parseTransactions(transactions) {
     const formatTransactionStatus = (transaction) => {
       const statusValue = transaction.status
-      const formattedStatus = transactionStatusFormattedTexts[statusValue]
+      const formattedStatus = transactionStatusTexts[statusValue]
 
       return {
         ...transaction,
@@ -82,7 +79,7 @@ export const filters = {
     const filters = Object.values(filterStatusTypes)
 
     const formatFilter = (filterValue) => {
-      const filterName = filterStatusTypesFormattedTexts[filterValue]
+      const filterName = filterStatusTypeTexts[filterValue]
       return { name: filterName, value: filterValue }
     }
 

@@ -47,7 +47,7 @@
 
 <script>
 import { debounce } from 'debounce'
-import { filters, filterStatusTypes } from './filters'
+import { filterOptions, filterStatusTypes } from '@/constants'
 
 import AppInput from '@/components/AppInput'
 import AppButton from '@/components/AppButton'
@@ -85,7 +85,7 @@ export default {
   },
   computed: {
     filterOptions() {
-      return filters.getOptions()
+      return filterOptions()
     },
   },
 }

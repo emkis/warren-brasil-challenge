@@ -1,4 +1,5 @@
 import { TransactionService } from '@/services/TransactionService'
+import * as Helpers from './helpers'
 
 export const transactions = {
   namespaced: true,
@@ -23,6 +24,28 @@ export const transactions = {
     FETCH_FAILURE(state) {
       state.isFetching = false
       state.isFetchFailed = true
+    },
+  },
+
+  getters: {
+    getFilteredTransactions: (state) => ({ searchQuery, statusFilter }) => {
+      const parsedTransactions = Helpers.parseTransactions(state.transactions)
+
+      const filteredTransactions = Helpers.filterTransactionsByStatusAndTitle({
+        transactions: parsedTransactions,
+        status: statusFilter,
+        title: searchQuery,
+      })
+
+      const groupedTransactions = Helpers.groupTransactionsByDate(
+        filteredTransactions
+      )
+
+      const sortedTransactions = Helpers.sortTransactionsDate(
+        groupedTransactions
+      )
+
+      return sortedTransactions
     },
   },
 

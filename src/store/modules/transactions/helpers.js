@@ -36,8 +36,6 @@ export function filterTransactionsByStatusAndTitle({
   status,
   title,
 }) {
-  const { isFilterMatchThisStatus, isTitleMatchQuery } = this
-
   return transactions.filter((transaction) => {
     if (!isFilterMatchThisStatus(transaction, status)) return
     return isTitleMatchQuery(transaction, title)

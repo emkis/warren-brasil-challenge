@@ -22,7 +22,7 @@ export default {
     searchQuery: { type: String, required: true },
     statusFilter: { type: String, required: true },
   },
-  beforeMount() {
+  created() {
     this.fetchTransactions()
   },
   computed: {

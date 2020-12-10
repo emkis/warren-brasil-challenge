@@ -20,8 +20,7 @@ const { mapState, mapActions, mapGetters } = createNamespacedHelpers(
 export default {
   name: 'TransactionHistoryContainer',
   props: {
-    searchQuery: { type: String, required: true },
-    statusFilter: { type: String, required: true },
+    filters: { type: Object, required: true },
   },
   created() {
     this.fetchTransactions()
@@ -44,8 +43,8 @@ export default {
     },
     transactions() {
       return this.getFilteredTransactions({
-        searchQuery: this.searchQuery,
-        statusFilter: this.statusFilter,
+        title: this.filters.title,
+        status: this.filters.status,
       })
     },
   },

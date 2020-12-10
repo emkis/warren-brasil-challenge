@@ -6,7 +6,7 @@
       <AppInput
         placeholder="Busque transações aqui"
         label="Busque transações aqui"
-        :value="searchQuery"
+        :value="filters.title"
         @input="handleInputChange"
         autofocus
       />
@@ -32,15 +32,14 @@
       <FilterOptions
         aria-label="Opções de filtro"
         :options="filterOptions"
-        :value="statusFilter"
+        :value="filters.status"
         @on-select="handleSelectedFilter"
       />
     </div>
 
     <TransactionHistoryContainer
       class="Transactions__history"
-      :searchQuery="searchQuery"
-      :statusFilter="statusFilter"
+      :filters="filters"
     />
   </div>
 </template>
@@ -66,18 +65,20 @@ export default {
   },
   data() {
     return {
-      searchQuery: '',
       isFiltersVisible: false,
-      statusFilter: filterStatusTypes.ALL,
+      filters: {
+        title: '',
+        status: filterStatusTypes.ALL,
+      },
     }
   },
   methods: {
     handleInputChange: debounce(function (event) {
       const inputValue = event.target.value.trim()
-      this.searchQuery = inputValue
+      this.filters.title = inputValue
     }, 200),
     handleSelectedFilter(filterName = '') {
-      this.statusFilter = filterName
+      this.filters.status = filterName
     },
     toggleFiltersVisibility() {
       this.isFiltersVisible = !this.isFiltersVisible

@@ -28,13 +28,13 @@ export const transactions = {
   },
 
   getters: {
-    getFilteredTransactions: (state) => ({ searchQuery, statusFilter }) => {
+    getFilteredTransactions: (state) => ({ title, status }) => {
       const parsedTransactions = Helpers.parseTransactions(state.transactions)
 
       const filteredTransactions = Helpers.filterTransactionsByStatusAndTitle({
+        title,
+        status,
         transactions: parsedTransactions,
-        status: statusFilter,
-        title: searchQuery,
       })
 
       const groupedTransactions = Helpers.groupTransactionsByDate(

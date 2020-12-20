@@ -1,7 +1,9 @@
 import { ApiService } from '@/services/ApiService'
 
-export const TransactionService = {
+export const createTransactionService = (httpClient = ApiService) => ({
   fetchTransactions() {
-    return ApiService.get('transactions')
+    return httpClient.get('transactions')
   },
-}
+})
+
+export const TransactionService = createTransactionService()
